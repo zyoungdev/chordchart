@@ -2,7 +2,7 @@ require([ "Engine" ], function( Engine ) {
     "use strict";
 
     let engine = new Engine();
-    engine.init();
+    engine.init( window.ChordChartState );
 
     return {
         init: engine.init,

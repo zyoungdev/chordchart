@@ -229,11 +229,23 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
                 Notes[ i ].stop( now );
         },
 
-        init: function() {
+        setState: function( state ) {
+            T.clickLength = state.clickLength;
+            T.root = state.root;
+            T.sequence = state.sequence;
+            T.volume = state.volume;
+            T.waveType = state.waveType;
+        },
+
+        init: function( state, callback ) {
             hf.log("Metronome init");
             let metronomeSequence = hf.get("metronomeSequence");
 
             T.pads = hf.getElByCN( "metronomePads" );
+
+            if ( state )
+                T.setState( state );
+
             setListeners();
             T.setSequence();
         }

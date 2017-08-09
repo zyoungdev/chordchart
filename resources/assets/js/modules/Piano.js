@@ -432,7 +432,15 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
                 T.Notes[ i ].stop( now );
         },
 
-        init: function( doneLoadingSamples_callback ) {
+        setState: function( state ) {
+            T.additionalNoteLength = state.additionalNoteLength;
+            T.playableOctave = state.playableOctave;
+            T.sequence = state.sequence;
+            T.transpose = state.transpose;
+            T.volume = state.volume;
+        },
+
+        init: function( state, doneLoadingSamples_callback ) {
             hf.log("Piano init");
 
             pianoSamples = new BufferLoader(
@@ -493,6 +501,9 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
                 doneLoadingSamples_callback
             );
             pianoSamples.load();
+
+            if ( state )
+                T.setState( state );
 
             setListeners();
             T.setSequence();

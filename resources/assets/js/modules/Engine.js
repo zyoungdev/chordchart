@@ -283,13 +283,33 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
             hf.log( state );
         },
 
-        init: function() {
+        setState: function( state ) {
+            if ( !state )
+                return;
+
+            T.tempo = state.tempo;
+        },
+
+        init: function( state ) {
             hf.log("Init");
 
-            Chart.init();
+
+            if ( !state ){
+                state = {
+                    globalState: null,
+                    engine: null,
+                    chart: null,
+                    instruments: [null, null]
+                };
+            }
+
+            gs.setState( state.globalState );
+            T.setState( state.engine );
+
+            Chart.init( state.chart );
             Master.init();
             for (let i = 0; i < Instruments.length; i++)
-                Instruments[ i ].init( buildEnvironment );
+                Instruments[ i ].init( state.instruments[ i ], buildEnvironment );
 
             setListeners();
         }

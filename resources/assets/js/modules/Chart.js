@@ -649,10 +649,19 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
         },
 
-        init: function() {
+        setState: function( state ) {
+            T.bars = state.bars;
+            T.defaultSequence = state.defaultSequence;
+        },
+
+        init: function( state ) {
             hf.log("Chart init");
 
             initDefaultScore();
+
+            if ( state )
+                T.setState( state );
+
             buildChart( T.bars );
             setListeners();
         }
