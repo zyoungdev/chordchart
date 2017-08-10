@@ -15,7 +15,7 @@ class PublicChartController extends Controller
         PublicChart::create( $request->all() );
 
         return redirect( 'p/' . $request->input( 'hash' ) )->with([
-            'status' => 'Your chart has been saved.'
+            'flash' => 'Your chart has been saved.'
         ]);
     }
 
@@ -24,7 +24,7 @@ class PublicChartController extends Controller
 
         if ( !$chart )
             return redirect('/')->with([
-                'status' => 'That chart does not exist. A new chart has been created'
+                'flash' => 'That chart does not exist. A new chart has been created'
             ]);
 
         return view('chart.existing', ['chart' => $chart] );
@@ -36,6 +36,9 @@ class PublicChartController extends Controller
         $chart->state = $request->input( 'state' );
         $chart->save();
 
-        return redirect( 'p/' . $chart->hash );
+        // return redirect( 'p/' . $chart->hash );
+        return redirect( 'p/' . $chart->hash )->with(
+            'flash',  'Your chart has been updated.'
+        );
     }
 }

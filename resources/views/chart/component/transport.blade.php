@@ -6,6 +6,6 @@
             <input id="tempo" class="num-input tempo" type="number" min="1" max="600" value="120">
         </label>
 
-        @yield( 'saveForm' )
+        @yield ( 'saveForm' )
     </div>
 </div>

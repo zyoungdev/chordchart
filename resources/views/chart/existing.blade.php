@@ -1,6 +1,6 @@
-@extends( 'chart.layout.main' )
+@extends ( 'chart.layout.main' )
 
-@section( 'saveForm' )
+@section ( 'saveForm' )
     <form method="POST" action="/p/{{ $chart->hash }}" id="saveForm">
         {{ csrf_field() }}
         <input name="hash" type="hidden">
@@ -9,7 +9,7 @@
     </form>
 @endsection
 
-@section( 'state' )
+@section ( 'state' )
     <script>
         window.ChordChartState = JSON.parse( '{!! $chart->state !!}' );
     </script>

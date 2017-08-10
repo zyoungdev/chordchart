@@ -1,6 +1,6 @@
-@extends( 'chart.layout.main' )
+@extends ( 'chart.layout.main' )
 
-@section( 'saveForm' )
+@section ( 'saveForm' )
     <form method="POST" action="/" id="saveForm">
         {{ csrf_field() }}
         <input name="hash" type="hidden">

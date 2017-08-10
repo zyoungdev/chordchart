@@ -8,6 +8,20 @@ $orange: #fd5a1e
 
 $border_radius: 5px
 
+@keyframes flash_disappear
+    $height: 50px
+    0%
+        height: 0px
+    10%
+        height: 0px
+    20%
+        height: $height
+    90%
+        height: $height
+    100%
+        height: 0px
+
+
 @mixin navigation-bar
     +e( a-100-fb, a-fb-jc, a-fb-ac )
     height: 75px
@@ -27,6 +41,16 @@ body
 
 body *
     user-select: none
+
+.flash
+    +e ( a-100, ta-c )
+    background-color: $orange
+    color: $white
+    font-size: 1.2em
+    line-height: 50px
+    animation-fill-mode: forwards
+    animation-duration: 10s
+    animation-name: flash_disappear
 
 .loading
     +e( a-100-fb, a-fb-jc, a-fb-ac, pos-f )
