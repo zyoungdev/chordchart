@@ -178,6 +178,9 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
             document.getElementById("loading").style.display = 'none';
             playButton = hf.get( "play" );
             selectedButton = hf.get( "navigation" ).getElementsByClassName( "activeButton" )[0];
+
+            if ( gs.isRunning )
+                T.play();
         }
 
         function reqFrame() {
@@ -253,7 +256,6 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
         play: function() {
             hf.log("Play");
 
-
             setBarNumber( Chart.getSelectedBarNumber() );
 
             /*
@@ -316,7 +318,6 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
         init: function( state ) {
             hf.log("Init");
-
 
             if ( !state ){
                 state = {

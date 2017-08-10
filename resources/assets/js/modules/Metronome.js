@@ -55,7 +55,6 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
 
         function buildPads( sequence ) {
             hf.log( "Building Metronome" );
-            hf.log( sequence );
             for ( let i = 0; i < sequence.length; i++ )
             {
                 T.addPad();
@@ -246,6 +245,14 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
             T.sequence = state.sequence;
             T.volume = state.volume;
             T.waveType = state.waveType;
+
+            let root = hf.get( "metronomeRoot" ),
+                type = hf.get( "metronomeType" ),
+                clickLength = hf.get( "metronomeClickLength" );
+
+            root.value = T.root;
+            type.value = T.waveType;
+            clickLength.value = T.clickLength;
         },
 
         init: function( state, callback ) {
