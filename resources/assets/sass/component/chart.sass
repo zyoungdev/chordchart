@@ -1,0 +1,95 @@
+.notes
+    +e( d-tb )
+    width: 100%
+    border-spacing: 1vw
+.noteQualities
+    width: 100%
+
+.noteQualities > div
+    +e( d-tb )
+    width: 100%
+    border-spacing: 1vw
+
+.note, .quality
+    +e( d-tbc )
+    +e( va-m, ta-c, cur-p )
+    width: 7vw
+    height: 7vw
+    background-color: $white
+
+.chart
+    +e( a-100-fb, a-fb-c )
+
+.chartControls
+    +navigation-bar
+    .center-container
+        +e( a-75-fb )
+
+.chartWorkspace
+    +e( a-100-fb, a-fb-r, a-fb-jsa )
+    margin-top: 10px
+
+.bar
+    +e( cur-p, pos-r, bxz-bb )
+    width: 25vw
+    height: 25vw
+    margin-bottom: 5px
+    border: solid 5px rgba( 0,0,0,0 )
+    padding: 0.2em
+    +tablet
+        width: 12.5vw
+        height: 12.5vw
+
+.barContainer
+    +e( d-tb )
+    background-color: rgba(255,255,255,.5)
+    width: 100%
+    height: 100%
+
+.barChord
+    +e( d-tbc )
+    height: 80%
+
+.barSelected
+    border: solid 5px magenta
+
+.barPlaying
+    .barContainer
+        background-color: rgba( 255,255,255,1 )
+
+.dragging
+    opacity: 0.2
+    border: solid 5px magenta
+
+.dragOverlay
+    +e( a-100-fb, a-fb-r, pos-a )
+    top: 0
+    height: 100%
+    div
+        +e( a-50 )
+        height: 100%
+        background-color: $orange
+        opacity: 0
+
+.dropSelectedLeft
+    border: solid 5px $white
+    border-left: solid 5px $orange
+
+.dropSelectedRight
+    border: solid 5px $white
+    border-right: solid 5px $orange
+
+.dropSelected
+    border: solid 5px $orange
+
+.rhythmNumber, .barChord, .barNumber
+    +e( d-tbr, ta-c, va-m )
+    width: 100%
+
+.rhythmNumber, .barNumber
+    height: 10%
+    background-color: rgba( 50, 100, 200, 1 )
+
+.playing
+    background-color: rgba( 255,255,255,1 ) !important
+

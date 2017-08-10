@@ -1,0 +1,42 @@
+.piano
+    +e( a-100-fb )
+    .pianoNavigation
+        +navigation-bar
+        .center-container
+            +e( a-75-fb )
+
+    .pianoControls
+        +navigation-bar
+        .center-container
+            +e( a-75-fb, a-fb-r )
+        label
+            +e( a-50-fb, a-fb-ac, a-fb-jc )
+        span
+            color: $white
+            margin-right: 5px
+
+    .pianoSequence
+        +e( a-100-fb )
+
+    .pianoSequenceContainer
+        +e( a-95-fb, a-fb-jsa, a-fb-r, m-c )
+        border: 3px
+        border-color: pink
+        > div
+            +e( a-45-fb )
+            +e( a-fb-jsa )
+            +e( a-fb-r )
+            height: 12vw
+            margin-bottom: 5px
+            .pad
+                +e( pos-r, cur-p )
+                +e( a-cent-null )
+                width: 18%
+                height: 70%
+                background-color: rgba(255,255,255, 0.6)
+                border: solid 10px rgba(255,255,255, 0.0)
+                border-radius: 50%
+
+    .pianoSequenceControls
+        +navigation-bar
+
