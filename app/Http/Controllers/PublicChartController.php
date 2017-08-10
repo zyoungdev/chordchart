@@ -8,7 +8,7 @@ use \App\PublicChart;
 class PublicChartController extends Controller
 {
     public function index() {
-        return view('index');
+        return view( 'chart.new' );
     }
 
     public function create(Request $request) {
@@ -27,7 +27,7 @@ class PublicChartController extends Controller
                 'status' => 'That chart does not exist. A new chart has been created'
             ]);
 
-        return view('chart.main', ['chart' => $chart] );
+        return view('chart.existing', ['chart' => $chart] );
     }
 
     public function update(Request $request, $hash ) {

@@ -7,8 +7,8 @@ mix.webpackConfig({
         ]
     },
     output: {
-        path: path.resolve( __dirname, 'public' ),
-        publicPath: '/',
+        // path: path.resolve( __dirname, 'public' ),
+        // publicPath: '/',
         chunkFilename: 'js/[id].chunk.js'
     }
 });
