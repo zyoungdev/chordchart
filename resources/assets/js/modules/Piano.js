@@ -128,6 +128,15 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
             window.addEventListener( "keyup", keyup );
         }
 
+        function buildPads( sequence ) {
+            for ( let i = 0; i < sequence.length; i++ )
+            {
+                T.addPad();
+            }
+
+            T.setSequence();
+        }
+
         function scheduleKeyboardNote( e ) {
             let theNote = keyboardKeys[ e.key ];
             if ( theNote || theNote === 0 )
@@ -505,6 +514,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
             if ( state )
                 T.setState( state );
 
+            buildPads( T.sequence );
             setListeners();
             T.setSequence();
         }

@@ -96,14 +96,7 @@
                 </label>
             </div>
         </div>
-        <div id="metronomeSequence" class="metronomeSequence">
-            <div>
-                <div class="metronomePad"></div>
-                <div class="metronomePad"></div>
-                <div class="metronomePad"></div>
-                <div class="metronomePad"></div>
-            </div>
-        </div>
+        <div id="metronomeSequence" class="metronomeSequence"></div>
     </div>
     <div id="piano" class="piano hide">
         <div id="pianoControls" class="pianoControls">
@@ -125,14 +118,7 @@
                     <button id="pianoAdd" class="pianoAdd button">+</button>
                 </div>
             </div>
-            <div id="pianoSequenceContainer" class="pianoSequenceContainer">
-                <div>
-                    <div class="pianoPad pad"></div>
-                    <div class="pianoPad pad"></div>
-                    <div class="pianoPad pad"></div>
-                    <div class="pianoPad pad"></div>
-                </div>
-            </div>
+            <div id="pianoSequenceContainer" class="pianoSequenceContainer"></div>
         </div>
     </div>
     <div id="chart" class="chart">

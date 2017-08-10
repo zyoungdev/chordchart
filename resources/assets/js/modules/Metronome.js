@@ -53,6 +53,17 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
             metronomeElement.addEventListener("mouseup", mouseup);
         }
 
+        function buildPads( sequence ) {
+            hf.log( "Building Metronome" );
+            hf.log( sequence );
+            for ( let i = 0; i < sequence.length; i++ )
+            {
+                T.addPad();
+            }
+
+            T.setSequence();
+        }
+
         function mousedown( e ) {
             if ( e.target.classList.contains("metronomePad") )
             {
@@ -245,6 +256,7 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
             if ( state )
                 T.setState( state );
 
+            buildPads( T.sequence );
             setListeners();
             T.setSequence();
         }
