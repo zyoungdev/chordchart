@@ -14,8 +14,9 @@ class CreatePublicChartsTable extends Migration
     public function up()
     {
         Schema::create('public_charts', function (Blueprint $table) {
-            $table->string('hash', 8)->index();
-            $table->text('state');
+            $table->increments('id');
+            $table->string( 'hash', 16 )->index();
+            $table->text( 'state' );
             $table->timestamps();
         });
     }

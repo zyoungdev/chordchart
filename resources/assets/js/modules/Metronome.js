@@ -241,7 +241,6 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
             hf.log("Metronome init");
             let metronomeSequence = hf.get("metronomeSequence");
 
-            T.pads = hf.getElByCN( "metronomePads" );
 
             if ( state )
                 T.setState( state );

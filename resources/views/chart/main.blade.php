@@ -29,7 +29,12 @@
             <span>Tempo</span>
             <input id="tempo" class="num-input tempo" type="number" min="1" max="600" value="120">
         </label>
-        <button id="save" class="button">Save</button>
+        <form method="POST" action="/p/{{ $chart->hash }}" id="saveForm">
+            {{ csrf_field() }}
+            <input name="hash" type="hidden">
+            <input name="state" type="hidden">
+            <button type="submit" id="save" class="button">Save</button>
+        </form>
     </div>
 </div>
 

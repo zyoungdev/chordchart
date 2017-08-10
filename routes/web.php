@@ -11,8 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// First entry into app
+Route::get('/', 'PublicChartController@index');
 
+// Save New chart
+Route::post('/', 'PublicChartController@create');
+
+// Show a saved chart
 Route::get('p/{hash}', 'PublicChartController@show');
+
+// Update a chart
+Route::post('p/{hash}', 'PublicChartController@update');

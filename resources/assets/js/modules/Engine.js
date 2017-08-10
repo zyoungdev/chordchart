@@ -22,6 +22,22 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
             eighth = 0,
             sixteenth = 0;
 
+        function createHash( length ) {
+            // Pool does not contain I, O, l, o, 0
+            let pool = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz123456789",
+                output = "",
+                min = 0,
+                max = pool.length - 1;
+
+            if ( !length )
+                length = 32;
+
+            for ( let i = length; i > 0; i-- )
+                output += pool[ Math.floor( Math.random() * ( max - min + 1 ) + min ) ];
+
+            return output;
+        }
+
         function currentTime() {
             return ac.currentTime;
         }
@@ -72,6 +88,13 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 e.preventDefault();
                 return false;
             });
+
+            hf.get( "saveForm" ).addEventListener("submit", function( e ) {
+                e.preventDefault();
+                T.setFormData( e );
+                e.target.submit();
+            });
+
         }
 
         function setInstruments() {
@@ -202,10 +225,6 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
                 document.getElementById( buttonText ).classList.remove( "hide" );
             }
-            else if ( e.target.id === "save" )
-            {
-                T.saveState();
-            }
         }
 
         function mouseup( e ) {
@@ -233,6 +252,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
         play: function() {
             hf.log("Play");
+
 
             setBarNumber( Chart.getSelectedBarNumber() );
 
@@ -272,7 +292,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 Instruments[ i ].stop( now );
         },
 
-        saveState: function() {
+        setFormData: function( e ) {
             let state = {
                 globalState: gs,
                 engine: T,
@@ -280,7 +300,11 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 instruments: Instruments
             };
 
-            hf.log( state );
+            let form = e.target,
+                hash = createHash( 8 );
+
+            form.elements.hash.value = hash;
+            form.elements.state.value = JSON.stringify( state );
         },
 
         setState: function( state ) {
