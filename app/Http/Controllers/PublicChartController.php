@@ -14,11 +14,18 @@ class PublicChartController extends Controller
     public function create(Request $request) {
         PublicChart::create( $request->all() );
 
-        return redirect( 'p/' . $request->input( 'hash' ) );
+        return redirect( 'p/' . $request->input( 'hash' ) )->with([
+            'status' => 'Your chart has been saved.'
+        ]);
     }
 
     public function show( $hash ) {
         $chart = PublicChart::where('hash', $hash)->first();
+
+        if ( !$chart )
+            return redirect('/')->with([
+                'status' => 'That chart does not exist. A new chart has been created'
+            ]);
 
         return view('chart.main', ['chart' => $chart] );
     }

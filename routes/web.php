@@ -13,6 +13,10 @@
 
 // First entry into app
 Route::get('/', 'PublicChartController@index');
+// First entry into app
+Route::get('p', function() {
+    return redirect( '/' );
+});
 
 // Save New chart
 Route::post('/', 'PublicChartController@create');
