@@ -8,7 +8,6 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
         this.transpose = 0;
         this.additionalNoteLength = 1;
         this.volume = 1;
-        this.Notes = [];
         this.playableOctave = 2;
         this.sequence = [1,1,1,1];
     }
@@ -22,6 +21,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
             drawTimes = [],
             drawIndex = 0,
             keysDown = {},
+            Notes = [],
             notes = {
                 "C" : 0,
                 "Db" : 1,
@@ -382,7 +382,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
                 Note.start( start + randomOffset );
                 Note.stop( noteEndTime + 0.02 );
 
-                T.Notes.push( Note );
+                Notes.push( Note );
             }
 
 
@@ -433,12 +433,12 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
         },
 
         clear: function() {
-            T.Notes = [];
+            Notes = [];
         },
 
         stop: function( now ) {
-            for ( let i = 0; i < T.Notes.length; i++ )
-                T.Notes[ i ].stop( now );
+            for ( let i = 0; i < Notes.length; i++ )
+                Notes[ i ].stop( now );
         },
 
         setState: function( state ) {
