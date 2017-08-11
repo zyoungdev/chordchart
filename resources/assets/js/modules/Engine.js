@@ -314,6 +314,9 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 return;
 
             T.tempo = state.tempo;
+
+            let tempo = hf.get( "tempo" );
+            tempo.value = T.tempo;
         },
 
         init: function( state ) {
