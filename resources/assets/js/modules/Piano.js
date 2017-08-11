@@ -449,10 +449,12 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
             T.volume = state.volume;
 
             let transpose = hf.get( "pianoTranspose" ),
-                length = hf.get( "pianoAdditionalNoteLength" );
+                length = hf.get( "pianoAdditionalNoteLength" ),
+                volume = hf.get( "pianoVolume" );
 
             transpose.value = T.transpose;
             length.value = T.additionalNoteLength;
+            pianoVolume.value = state.volume;
         },
 
         init: function( state, doneLoadingSamples_callback ) {

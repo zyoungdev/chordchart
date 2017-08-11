@@ -248,11 +248,13 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
 
             let root = hf.get( "metronomeRoot" ),
                 type = hf.get( "metronomeType" ),
-                clickLength = hf.get( "metronomeClickLength" );
+                clickLength = hf.get( "metronomeClickLength" ),
+                volume = hf.get( "metronomeVolume" );
 
             root.value = T.root;
             type.value = T.waveType;
             clickLength.value = T.clickLength;
+            volume.value = state.volume;
         },
 
         init: function( state, callback ) {
