@@ -2,6 +2,7 @@
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
+
     "license": "MIT",
     "type": "project",
     "require": {
@@ -37,7 +38,27 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize"
+            "php artisan optimize",
+            "",
+            "#######################################",
+            "#      POST INSTALL INSTRUCTIONS' ",
+            "#######################################",
+            "",
+            "# Steps needed for working installation",
+            "",
+            "# $ cp .env.example .env",
+            "# $ php artisan key:generate",
+            "# Add DB details to .env",
+            "# $ chown -R <user>:http storage",
+            "# $ fix storage 775 664",
+            "# Update sassBoilerplate location in .gitmodules",
+            "# $ git submodule init",
+            "# $ git submodule update",
+            "# $ php artisan migrate",
+            "# $ npm install",
+            "# $ npm run production",
+            "# Add notes folder to public",
+            "# Place GA.js and favicon in public folder"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
