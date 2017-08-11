@@ -15,4 +15,4 @@ mix.webpackConfig({
 
 mix.js( 'resources/assets/js/main.js', 'public/js' )
     .sass( 'resources/assets/sass/main.sass', 'public/css' )
-    .sourceMaps();
+    .sourceMaps( false );
