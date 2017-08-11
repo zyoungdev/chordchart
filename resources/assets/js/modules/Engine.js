@@ -56,9 +56,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
         }
 
         function setListeners() {
-            window.addEventListener("blur", function() {
-                T.stop();
-            });
+            window.addEventListener("blur", function() { });
 
             window.addEventListener("keydown", function(e) {
                 if (e.type === "keydown")
@@ -94,7 +92,6 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 T.setFormData( e );
                 e.target.submit();
             });
-
         }
 
         function setInstruments() {
