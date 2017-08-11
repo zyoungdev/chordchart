@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\PublicChart;
+use \App\Http\Requests\PublicChartRequest;
 
 class PublicChartController extends Controller
 {
@@ -11,7 +12,7 @@ class PublicChartController extends Controller
         return view( 'chart.new' );
     }
 
-    public function create(Request $request) {
+    public function create( PublicChartRequest $request ) {
         PublicChart::create( $request->all() );
 
         return redirect( 'p/' . $request->input( 'hash' ) )->with([
@@ -30,7 +31,7 @@ class PublicChartController extends Controller
         return view('chart.existing', ['chart' => $chart] );
     }
 
-    public function update(Request $request, $hash ) {
+    public function update( PublicChartRequest $request, $hash ) {
         $chart = PublicChart::where('hash', $hash)->first();
 
         $chart->state = $request->input( 'state' );
