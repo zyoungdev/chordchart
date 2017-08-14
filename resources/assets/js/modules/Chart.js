@@ -115,6 +115,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             function dragstart( e ) {
                 hf.log( "dragstart" );
                 e.target.classList.add( "dragging" );
+                e.dataTransfer.setData('text', 'DUMMYDATA');
             }
 
             function dragover( e ) {
