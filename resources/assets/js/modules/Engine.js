@@ -89,7 +89,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
             hf.get( "saveForm" ).addEventListener("submit", function( e ) {
                 e.preventDefault();
-                T.setFormData( e );
+                setFormData( e );
                 e.target.submit();
             });
         }
@@ -167,6 +167,21 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
         function setBarNumber( num ) {
             Chart.setBarNumber( num );
             selectedBarNum = num;
+        }
+
+        function setFormData( e ) {
+            let state = {
+                globalState: gs,
+                engine: T,
+                chart: Chart,
+                instruments: Instruments
+            };
+
+            let form = e.target,
+                hash = createHash( 8 );
+
+            form.elements.hash.value = hash;
+            form.elements.state.value = JSON.stringify( state );
         }
 
         function buildEnvironment() {
@@ -291,20 +306,6 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 Instruments[ i ].stop( now );
         },
 
-        setFormData: function( e ) {
-            let state = {
-                globalState: gs,
-                engine: T,
-                chart: Chart,
-                instruments: Instruments
-            };
-
-            let form = e.target,
-                hash = createHash( 8 );
-
-            form.elements.hash.value = hash;
-            form.elements.state.value = JSON.stringify( state );
-        },
 
         setState: function( state ) {
             if ( !state )
