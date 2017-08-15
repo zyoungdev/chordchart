@@ -34,10 +34,8 @@ class PublicChartController extends Controller
     public function update( PublicChartRequest $request, $hash ) {
         $chart = PublicChart::where( 'hash', $hash )->first();
 
-        $chart->state = $request->input( 'state' );
-        $chart->save();
+        $chart->update( $request->all() );
 
-        // return redirect( 'p/' . $chart->hash );
         return redirect( 'p/' . $chart->hash )->with(
             'flash',  'Your chart has been updated.'
         );

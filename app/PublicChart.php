@@ -8,6 +8,8 @@ class PublicChart extends Model
 {
     protected $fillable = [
         'hash',
-        'state'
+        'state',
+        'title',
+        'description'
     ];
 }

@@ -1,0 +1,19 @@
+.save-form-container
+    +e( a-100-fb, a-fb-c, a-fb-ac, a-fb-jc )
+    height: 100%
+    background-color: $white
+    form 
+        +e( a-50-fb )
+        // +e( a-50-fb, a-fb-r, a-fb-ac, a-fb-jc )
+        input, button, h3, h2
+            +e( a-100 )
+            height: 3em
+            margin-bottom: 2em
+        button
+            height: 2em
+            font-size: 1.5em
+            &:hover
+                background-color: $cyan
+                color: $white
+        h3,h2
+            +e( ta-c )

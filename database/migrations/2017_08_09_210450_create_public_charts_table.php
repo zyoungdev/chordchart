@@ -17,6 +17,8 @@ class CreatePublicChartsTable extends Migration
             $table->increments('id');
             $table->string( 'hash', 16 )->index();
             $table->text( 'state' );
+            $table->text('title')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

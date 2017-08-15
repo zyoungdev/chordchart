@@ -10,6 +10,15 @@
 </head>
 
 <body>
+    @if ( @errors )
+        @foreach( $errors as $error )
+            <div class="flash">
+                @include( 'chart.component.error' )
+            </div>
+        @endforeach
+    @endif
+
+
     @include( 'chart.component.flash' )
 
     @include ( 'chart.component.navigation' )
@@ -24,6 +33,8 @@
         @include ( 'chart.component.piano' )
         
         @include ( 'chart.component.chart' )
+
+        @include ( 'chart.component.details' )
     </div>
         
     @include ( 'chart.component.notice' )
