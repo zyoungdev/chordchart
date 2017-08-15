@@ -83,7 +83,8 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
             });
 
             document.addEventListener("contextmenu", function( e ) {
-                e.preventDefault();
+                if ( e.target.tagName !== "A" )
+                    e.preventDefault();
                 return false;
             });
 
@@ -249,17 +250,20 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
         }
 
         function mouseup( e ) {
-            if ( e.target.id === "metronomeVolume" )
+            if ( e.which === 1 )
             {
-                Instruments[ 0 ].setVolume( parseInt( e.target.value ) / 10 );
-            }
-            else if ( e.target.id === "pianoVolume" )
-            {
-                Instruments[ 1 ].setVolume( parseInt( e.target.value ) / 10 );
-            }
-            else if ( e.target.id === "masterVolume" )
-            {
-                Master.setVolume( parseInt( e.target.value ) / 10 );
+                if ( e.target.id === "metronomeVolume" )
+                {
+                    Instruments[ 0 ].setVolume( parseInt( e.target.value ) / 10 );
+                }
+                else if ( e.target.id === "pianoVolume" )
+                {
+                    Instruments[ 1 ].setVolume( parseInt( e.target.value ) / 10 );
+                }
+                else if ( e.target.id === "masterVolume" )
+                {
+                    Master.setVolume( parseInt( e.target.value ) / 10 );
+                }
             }
         }
 

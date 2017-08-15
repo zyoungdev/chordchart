@@ -2,7 +2,8 @@
 
 @section ( 'saveForm' )
     <div class="save-form-container">
-        <div class="details-link"><h2><a href="{{  Request::url() }}">Link to Chart</a></h2></div>
+        <h2 class="link-title">Chart Link</h2>
+        <div class="details-link"><a href="{{  Request::url() }}" class="link">{{ Request::url() }}</a></div>
         <form method="POST" action="/p/{{ $chart->hash }}" id="saveForm" class=".center-container">
             @include( 'chart.component.save-form' )
             <label for="title">Title</label>
