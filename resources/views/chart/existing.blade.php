@@ -2,12 +2,13 @@
 
 @section ( 'saveForm' )
     <div class="save-form-container">
+        <div class="details-link"><h2><a href="{{  Request::url() }}">Link to Chart</a></h2></div>
         <form method="POST" action="/p/{{ $chart->hash }}" id="saveForm" class=".center-container">
             @include( 'chart.component.save-form' )
             <label for="title">Title</label>
-            <input type="text" id="title" name="title" value="{{ $chart->title }}" required>
+            <input type="text" id="title" name="title" value="{{ $chart->title }}" placeholder="Give your masterpiece a title" required>
             <label for="description">Description</label>
-            <input type="text" id="description" name="description" value="{{ $chart->description }}" required>
+            <input type="text" id="description" name="description" value="{{ $chart->description }}" placeholder="Describe this piece in any way" required>
             <button type="submit" id="submitChart" class="button update">Update</button>
         </form>
     </div>

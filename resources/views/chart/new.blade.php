@@ -2,6 +2,7 @@
 
 @section ( 'saveForm' )
     <div class="save-form-container">
+        <button class="details-link"><a href="{{  Request::url() }}">Link to Chart</a></div>
         <form method="POST" action="/" id="saveForm" class=".center-container">
             @include( 'chart.component.save-form' )
             <label for="title" class="input-label">Title</label>
