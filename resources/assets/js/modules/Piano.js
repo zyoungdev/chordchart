@@ -169,6 +169,10 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
         }
 
         function keydown( e ) {
+            // If inputting text
+            if ( document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA")
+                return;
+
             // If the key is already down
             if ( keysDown[ e.key ] )
                 return;

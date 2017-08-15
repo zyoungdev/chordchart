@@ -59,6 +59,10 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
             window.addEventListener("blur", function() { });
 
             window.addEventListener("keydown", function(e) {
+                // If inputting text
+                if ( document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA")
+                    return;
+
                 if (e.type === "keydown")
                     if (e.code === "Space")
                     {
@@ -82,9 +86,11 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 T.setTempo( tempo );
             });
 
-            hf.get( "chartLink" ).addEventListener("click", function( e ) {
-                e.preventDefault();
-            });
+            try {
+                hf.get( "chartLink" ).addEventListener("click", function( e ) {
+                    e.preventDefault();
+                });
+            } catch ( err ){ }
 
             document.addEventListener("contextmenu", function( e ) {
                 if ( e.target.tagName !== "A" )
