@@ -10,9 +10,9 @@
         <form method="POST" action="/p/{{ $chart->hash }}" id="saveForm" class=".center-container">
             @include( 'chart.component.save-form' )
             <label for="title">Title</label>
-            <input type="text" id="title" name="title" value="{{ $chart->title }}" placeholder="Give your masterpiece a title" required>
+            <input type="text" id="title" name="title" value="{{ $chart->title }}" placeholder="Give your masterpiece a title">
             <label for="description">Description</label>
-            <input type="text" id="description" name="description" value="{{ $chart->description }}" placeholder="Describe this piece in any way" required>
+            <textarea id="description" name="description" placeholder="Describe this piece in any way">{{ $chart->description }}</textarea>
             <button type="submit" id="submitChart" class="button update">Update</button>
         </form>
     </div>

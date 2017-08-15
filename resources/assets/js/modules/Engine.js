@@ -82,10 +82,6 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 T.setTempo( tempo );
             });
 
-            hf.get( "chartLink" ).addEventListener("click", function( e ) {
-                e.preventDefault();
-            });
-
             document.addEventListener("contextmenu", function( e ) {
                 if ( e.target.tagName !== "A" )
                     e.preventDefault();
