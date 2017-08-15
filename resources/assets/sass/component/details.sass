@@ -4,6 +4,11 @@
     .link-title
         color: $white
 
+    .center-container
+        +e( a-cent-null, d-cent-cent )
+        height: 50%
+        +desktop
+            width: 50%
     .details-link
         +e( a-100, cur-p )
         background-color: lighten( $dark_black, 10% )
@@ -12,11 +17,12 @@
         &:hover
             background-color: lighten( $dark_black, 30% )
         .link-title
-            +e( a-20, a-p-5, a-cent-null, ta-r )
-            width: 15%
+            +e( a-20, ta-r )
+            font-size: 1.3em
+            padding-right: 10px
             margin: 0
         a
-            +e( a-80, a-p-5, a-cent-null, ta-l )
+            +e( a-80, ta-l )
             font-size: 1.3em
             color: $white
             text-decoration: none

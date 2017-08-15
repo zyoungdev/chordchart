@@ -4,10 +4,12 @@
     <div class="save-form-container">
         
         <span class="details-link">
-            <h3 class="link-title">Link</h3>
-            <a href="{{  Request::url() }}" id="chartLink" class="link">{{ Request::url() }}</a>
+            <div class="center-container">
+                <h3 class="link-title">Link</h3>
+                <a href="{{  Request::url() }}" id="chartLink" class="link">{{ Request::url() }}</a>
+            </div>
         </span>
-        <form method="POST" action="/p/{{ $chart->hash }}" id="saveForm" class=".center-container">
+        <form method="POST" action="{{ $chart->hash }}" id="saveForm" class=".center-container">
             @include( 'chart.component.save-form' )
             <label for="title">Title</label>
             <input type="text" id="title" name="title" value="{{ $chart->title }}" placeholder="Give your masterpiece a title">

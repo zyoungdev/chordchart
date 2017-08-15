@@ -15,7 +15,7 @@ class PublicChartController extends Controller
     public function create( PublicChartRequest $request ) {
         PublicChart::create( $request->all() );
 
-        return redirect( 'p/' . $request->input( 'hash' ) )->with([
+        return redirect( $request->input( 'hash' ) )->with([
             'flash' => 'Your chart has been saved.'
         ]);
     }
@@ -36,7 +36,7 @@ class PublicChartController extends Controller
 
         $chart->update( $request->except([ 'hash' ]) );
 
-        return redirect( 'p/' . $chart->hash )->with(
+        return redirect( $chart->hash )->with(
             'flash',  'Your chart has been updated.'
         );
     }
