@@ -1,13 +1,19 @@
 @mixin navigation-bar
-    +e( a-100-fb, a-fb-jc, a-fb-ac )
-    height: 75px
+    +e( a-100, a-fb-r, a-fb-jsa, a-fb-c )
+    display: table
+    height: 5vh
     background-color: darken( $dark_blue, 15% )
+    border-bottom: solid 1px lighten( $dark_black, 20% )
     +tablet
-        height: 50px
+        height: 75px
     .center-container
-        +e( a-100-fb, a-fb-r, a-fb-jsa, a-fb-ac )
+        +e( a-100-fb, a-fb-r )
+        display: table-cell
+        height: 100%
+    .button
         height: 100%
 
 .navigation
+    flex-wrap: nowrap
     +navigation-bar
 

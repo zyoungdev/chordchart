@@ -240,6 +240,12 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
                 document.getElementById( buttonText ).classList.remove( "hide" );
             }
+            else if ( e.target.id ===  "transportSave")
+            {
+                let saveButton = hf.get( "submitChart" );
+                hf.log( saveButton );
+                saveButton.click();
+            }
         }
 
         function mouseup( e ) {

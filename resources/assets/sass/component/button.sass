@@ -1,13 +1,15 @@
 .button
-    +e( a-100, cur-p )
+    $border_lighten: 20% 
+    +e( a-20, cur-p )
     height: 75%
     background-color: $black
     color: $white
-    border-radius: $border_radius
-    border: none
-    width: 24vw
-    +tablet
-        width: 12.5vw
+    border-top: none
+    border-bottom: none
+    border-left: solid 1px lighten( $dark_black, $border_lighten )
+    border-right: solid 1px lighten( $dark_black, $border_lighten )
+    // border-left: 1px lighten( $dark_black, 10% )
+    // border-right: 1px lighten( $dark_black, 10% )
     &:hover
         background-color: $white
         color: $black

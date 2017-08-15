@@ -1,3 +1,3 @@
-<div id="details" class="details">
+<div id="details" class="details hide">
     @yield( 'saveForm' )
 </div>

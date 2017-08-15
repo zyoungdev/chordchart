@@ -1,8 +1,33 @@
 .transport
-    +navigation-bar
-    background-color: $dark_blue
+    $height: 5vh
+    +e( a-100-fb, a-fb-jsa, a-fb-c )
+    background-color: lighten( $dark_black, 10% )
+    margin: 0
+    padding: 0
+    overflow: hidden
     .input-container
         color: $white
+        padding: 0
+        width: 25%
+        height: $height / 2
+        button, label
+            border: none
+            height: 100%
+    .center-container
+        +e( a-50-fb, a-fb-c )
+        height: $height
+    .button
+        height: $height
+        width: 50%
+    span, input
+        +e( a-100 )
+        border-radius: 0
+        height: $height / 2
+    span
+        line-height: $height / 2
+        text-align: center
+    #transport-save
+        background-color: darken( $cyan, 25% )
 
 #play, #save
     background-color: rgba( 50,150,50,1 )

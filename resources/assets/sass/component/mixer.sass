@@ -1,6 +1,5 @@
 .mixer
     +e( a-75-fb, a-fb-r, a-fb-jsa, m-c )
-
 .mixer input
     width: 10px
     height: 200px
@@ -11,9 +10,13 @@
     +e(a-90-fb, a-fb-r, a-null-cent, a-fb-jsa, a-fb-ac)
 
 .mixer-input-container
-    +e( a-33-fb, a-fb-c, ta-c )
+    +e( a-33-fb, a-fb-c, a-fb-jsa, a-fb-ac, ta-c )
     color: $white
+    &:hover
+        background-color: lighten( $dark_black, 20% )
 
 .vertical-slider
+    width: 10px
+    background: red
     -webkit-appearance: slider-vertical
 

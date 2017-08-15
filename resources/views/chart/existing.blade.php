@@ -18,3 +18,7 @@
         window.ChordChartState = JSON.parse( '{!! $chart->state !!}' );
     </script>
 @endsection
+
+@section( 'saveButton' )
+    <button id="transportSave" class="button">Update</button>
+@endsection

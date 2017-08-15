@@ -34,7 +34,7 @@ class PublicChartController extends Controller
     public function update( PublicChartRequest $request, $hash ) {
         $chart = PublicChart::where( 'hash', $hash )->first();
 
-        $chart->update( $request->all() );
+        $chart->update( $request->except([ 'hash' ]) );
 
         return redirect( 'p/' . $chart->hash )->with(
             'flash',  'Your chart has been updated.'
