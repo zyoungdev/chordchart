@@ -5,8 +5,18 @@
         color: $white
 
     .details-link
+        +e( a-100, cur-p )
+        background-color: lighten( $dark_black, 10% )
         margin-bottom: 2em
+        height: 3em 
+        &:hover
+            background-color: lighten( $dark_black, 30% )
+        .link-title
+            +e( a-20, a-p-5, a-cent-null, ta-r )
+            width: 15%
+            margin: 0
         a
-            @extend h2
+            +e( a-80, a-p-5, a-cent-null, ta-l )
+            font-size: 1.3em
             color: $white
             text-decoration: none

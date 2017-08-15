@@ -1,9 +1,12 @@
 define([ "GlobalState" ], function( gs ) {
     "use strict";
 
-    let instance = null;
+    let T = {},
+        instance = null;
 
-    function HelperFunctions(){}
+    function HelperFunctions(){
+        T = this;
+    }
 
     HelperFunctions.prototype = {
         clamp: function( val, min, max ) {
@@ -64,6 +67,17 @@ define([ "GlobalState" ], function( gs ) {
             xhr.open(type, uri, true);
             if (fd) xhr.send(fd);
             else xhr.send();
+        },
+        toast: function( message ) {
+            let div = document.createElement( "div" );
+            div.classList.add( "toast" );
+            div.id = "toast";
+            div.innerHTML = message;
+            document.body.appendChild( div );
+
+            setTimeout(function() {
+                document.body.removeChild( T.get( "toast" ) );
+            }, 3000);
         },
         log: function(message) {
             if ( gs.debug )

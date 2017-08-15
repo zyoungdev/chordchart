@@ -82,6 +82,10 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 T.setTempo( tempo );
             });
 
+            hf.get( "chartLink" ).addEventListener("click", function( e ) {
+                e.preventDefault();
+            });
+
             document.addEventListener("contextmenu", function( e ) {
                 if ( e.target.tagName !== "A" )
                     e.preventDefault();
@@ -208,44 +212,63 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
         }
 
         function mousedown( e ) {
-            if ( e.target.id === "play" )
+            if ( e.which === 1 )
             {
-                if ( gs.isRunning )
-                    T.stop();
-                else
-                    T.play();
-            }
-            else if ( e.target.classList.contains( "navButton" ) )
-            {
-                let navButtons = hf.getElByCN( "navButton" ),
-                    button = e.target,
-                    buttonText = e.target.innerHTML.toLowerCase();
-
-                // Remove highlight from button
-                if ( selectedButton )
-                    selectedButton.classList.remove( "activeButton" );
-
-                // Change selected nav button
-                selectedButton = button;
-                button.classList.add( "activeButton" );
-
-                // Hide all pages
-                for ( let i = 0; i < navButtons.length; i++ )
+                if ( e.target.id === "play" )
                 {
-                    let pageName = navButtons[ i ].innerHTML.toLowerCase(),
-                        page = document.getElementById( pageName );
-
-                    if ( page )
-                        page.classList.add( "hide" );
+                    if ( gs.isRunning )
+                        T.stop();
+                    else
+                        T.play();
                 }
+                else if ( e.target.classList.contains( "navButton" ) )
+                {
+                    let navButtons = hf.getElByCN( "navButton" ),
+                        button = e.target,
+                        buttonText = e.target.innerHTML.toLowerCase();
 
-                document.getElementById( buttonText ).classList.remove( "hide" );
-            }
-            else if ( e.target.id ===  "transportSave")
-            {
-                let saveButton = hf.get( "submitChart" );
-                hf.log( saveButton );
-                saveButton.click();
+                    // Remove highlight from button
+                    if ( selectedButton )
+                        selectedButton.classList.remove( "activeButton" );
+
+                    // Change selected nav button
+                    selectedButton = button;
+                    button.classList.add( "activeButton" );
+
+                    // Hide all pages
+                    for ( let i = 0; i < navButtons.length; i++ )
+                    {
+                        let pageName = navButtons[ i ].innerHTML.toLowerCase(),
+                            page = document.getElementById( pageName );
+
+                        if ( page )
+                            page.classList.add( "hide" );
+                    }
+
+                    document.getElementById( buttonText ).classList.remove( "hide" );
+                }
+                else if ( e.target.id ===  "transportSave")
+                {
+                    let saveButton = hf.get( "submitChart" );
+                    hf.log( saveButton );
+                    saveButton.click();
+                }
+                else if ( e.target.id === "chartLink" )
+                {
+                    // Add textarea to body
+                    let ta = document.createElement( 'textarea' );
+                    ta.innerHTML = e.target.innerHTML;
+                    ta.id = "copy-text-ta";
+                    document.body.appendChild( ta );
+
+                    // Copy text and remove textarea
+                    ta = hf.get( "copy-text-ta" );
+                    ta.select();
+                    document.execCommand( 'copy' );
+                    document.body.removeChild( hf.get( "copy-text-ta" ) );
+
+                    hf.toast( "Chart link copied to clipboard" );
+                }
             }
         }
 
