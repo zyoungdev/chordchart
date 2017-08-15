@@ -254,7 +254,7 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
             root.value = T.root;
             type.value = T.waveType;
             clickLength.value = T.clickLength;
-            volume.value = state.volume;
+            volume.value = state.volume * 10;
         },
 
         init: function( state, callback ) {

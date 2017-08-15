@@ -458,7 +458,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
 
             transpose.value = T.transpose;
             length.value = T.additionalNoteLength;
-            pianoVolume.value = state.volume;
+            volume.value = state.volume * 10;
         },
 
         init: function( state, doneLoadingSamples_callback ) {
