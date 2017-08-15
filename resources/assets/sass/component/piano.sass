@@ -4,16 +4,24 @@
         +navigation-bar
         .center-container
             +e( a-75-fb )
+            background-color: $dark_black
 
     .pianoControls
         +navigation-bar
         .center-container
             +e( a-75-fb, a-fb-r )
+            background-color: $dark_black
         label
             +e( a-50-fb, a-fb-ac, a-fb-jc )
         span
             color: $white
             margin-right: 5px
+        .input-container
+            +e( a-33 )
+            *
+              +e( a-33 )
+              &:hover
+                  background-color: lighten( $dark_black, 20% )
 
     .pianoSequence
         +e( a-100-fb )
@@ -39,4 +47,6 @@
 
     .pianoSequenceControls
         +navigation-bar
+        width: 33.333%
+        height: 100%
 

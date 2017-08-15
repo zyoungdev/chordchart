@@ -4,11 +4,16 @@
     .metronomeControls
         +navigation-bar
         color: $white
+        .input-container, .button
+            +e( a-20-fb, a-fb-jsa, a-fb-jc )
+            height: 100%
+            text-align: center
+            *
+                width: 50%
         .center-container
             +e( a-100-fb )
 
     .metronome-input
-        height: 75%
         text-align-last: center
 
     .metronomeSequence
