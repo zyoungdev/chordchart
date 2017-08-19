@@ -345,7 +345,6 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 Instruments[ i ].stop( now );
         },
 
-
         setState: function( state ) {
             if ( !state )
                 return;

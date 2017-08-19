@@ -10,14 +10,11 @@
 </head>
 
 <body>
-    @if ( @errors )
-        @foreach( $errors as $error )
-            <div class="flash">
-                @include( 'chart.component.error' )
-            </div>
+    @if ( $errors->any() )
+        @foreach ( $errors->all() as $error )
+            @include ( 'chart.component.error' )
         @endforeach
     @endif
-
 
     @include( 'chart.component.flash' )
 
