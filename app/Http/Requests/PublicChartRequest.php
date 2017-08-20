@@ -98,6 +98,7 @@ class PublicChartRequest extends FormRequest
         }
         return $pass;
     }
+
     private function validate_state_instruments( $instruments ) {
         $pass = false;
         $metronome = $instruments[ 0 ];
