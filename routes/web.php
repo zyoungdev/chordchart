@@ -12,13 +12,18 @@
 */
 
 // First entry into app
-Route::get('/', 'PublicChartController@index');
+Route::get('/', 'ChartController@index');
 
 // Save New chart
-Route::post('/', 'PublicChartController@create');
+Route::post('/', 'ChartController@create');
+
+Auth::routes();
 
 // Show a saved chart
-Route::get('{hash}', 'PublicChartController@show');
+Route::get('{hash}', 'ChartController@show');
 
 // Update a chart
-Route::post('{hash}', 'PublicChartController@update');
+Route::post('{hash}', 'ChartController@update');
+
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class PublicChartRequest extends FormRequest
+class ChartRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -230,7 +230,7 @@ class PublicChartRequest extends FormRequest
         $this->sanitize();
 
         return [
-            'hash' => 'required|unique:public_charts,hash|max:' . env( 'APP_HASH_SIZE' ) . '|min:' . env( 'APP_HASH_SIZE' ),
+            'hash' => 'required|unique:charts,hash|max:' . env( 'APP_HASH_SIZE' ) . '|min:' . env( 'APP_HASH_SIZE' ),
             'state' => 'required',
             'title' => 'max:256|nullable',
             'description' => 'max:4096|nullable'

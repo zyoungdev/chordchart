@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePublicChartsTable extends Migration
+class CreateChartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreatePublicChartsTable extends Migration
      */
     public function up()
     {
-        Schema::create('public_charts', function (Blueprint $table) {
+        Schema::create('charts', function (Blueprint $table) {
             $table->increments('id');
             $table->string( 'hash', 16 )->index();
+            $table->boolean( 'is_public' )->default( false );
             $table->text( 'state' );
             $table->text('title')->nullable();
             $table->text('description')->nullable();
+            $table->integer( 'user_id' )->unsigned()->default( 0 );
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreatePublicChartsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('public_charts');
+        Schema::dropIfExists('charts');
     }
 }
