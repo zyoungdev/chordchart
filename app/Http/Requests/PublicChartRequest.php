@@ -32,9 +32,6 @@ class PublicChartRequest extends FormRequest
             log::debug( 'engine.tempo != integer' );
             return false;
         }
-        else {
-            log::debug( 'engine.tempo == integer' );
-        }
 
         return true;
     }
@@ -43,26 +40,18 @@ class PublicChartRequest extends FormRequest
         $pass = filter_var( $globalState[ 'debug' ], FILTER_VALIDATE_BOOLEAN );
         if ( $pass === false )
             Log::debug( 'globalState.debug != boolean' );
-        else
-            Log::debug( 'globalState.debug == boolean' );
 
         $pass = filter_var( $globalState[ 'isRunning' ], FILTER_VALIDATE_BOOLEAN );
-        if ( $pass === false || $pass === true )
-            Log::debug( 'globalState.isRunning == boolean' );
-        else
+        if ( !( $pass === false || $pass === true ) )
             Log::debug( 'globalState.isRunning != boolean' );
 
         $pass = filter_var( $globalState[ 'MaxLookAhead' ], FILTER_VALIDATE_FLOAT );
         if ( $pass === false )
             Log::debug( 'globalState.MaxLookAhead != float' );
-        else
-            Log::debug( 'globalState.MaxLookAhead == float' );
 
         $pass = filter_var( $globalState[ 'lookAhead' ], FILTER_VALIDATE_FLOAT );
         if ( $pass === false )
             Log::debug( 'globalState.lookAhead != float' );
-        else
-            Log::debug( 'globalState.lookAhead == float' );
 
         return $pass;
     }
@@ -72,17 +61,13 @@ class PublicChartRequest extends FormRequest
         foreach ( $chart[ 'bars' ] as $bar )
         {
             $pass = empty( $bar[ 'element' ] );
-            if ( $pass )
-                Log::debug( 'chart.bar.element is empty. Good.' );
-            else
+            if ( $pass === false )
                 Log::debug( 'chart.bar.element is not empty. Element Should be empty array.' );
 
             // Catch non-valid characters
             $bar[ 'chordName' ] = preg_grep("/[A-Za-z]*/", str_split( $bar[ 'chordName' ] ), PREG_GREP_INVERT);
             $pass = empty( $bar[ 'chordName' ] );
-            if ( $pass )
-                Log::debug( 'chart.bar.chordName is valid data.' );
-            else
+            if ( $pass === false )
             {
                 Log::debug( 'chart.bar.chordName is invalid data. \n chordName: ' );
                 Log::debug( $bar[ 'chordName' ] );
@@ -91,9 +76,7 @@ class PublicChartRequest extends FormRequest
             // Catch non-valid characters
             $bar[ 'chordQuality' ] = preg_grep("/[A-Za-z0-9]*/", str_split( $bar[ 'chordQuality' ] ), PREG_GREP_INVERT);
             $pass = empty( $bar[ 'chordQuality' ] );
-            if ( empty( $bar[ 'chordQuality' ] ) )
-                Log::debug( 'chart.bar.chordQuality is valid data.' );
-            else
+            if ( $pass === false )
             {
                 Log::debug( 'chart.bar.chordQuality is invalid data. \n chordQuality: ' );
                 Log::debug( $bar[ 'chordQuality' ] );
@@ -104,8 +87,6 @@ class PublicChartRequest extends FormRequest
                 $pass = filter_var( $pad, FILTER_VALIDATE_INT );
                 if ( $pass === false  )
                     Log::debug( 'chart.bar.rhythm.pad is not integer.' );
-                else
-                    Log::debug( 'chart.bar.rhythm.pad is integer.' );
             }
         }
 
@@ -114,8 +95,6 @@ class PublicChartRequest extends FormRequest
             $pass = filter_var( $pad, FILTER_VALIDATE_INT );
             if ( $pass === false  )
                 Log::debug( 'chart.defaultSequence.pad is not integer.' );
-            else
-                Log::debug( 'chart.defaultSequence.pad is integer.' );
         }
         return $pass;
     }
@@ -128,35 +107,25 @@ class PublicChartRequest extends FormRequest
         *                       metronome
         **********************************************************/
             $pass = filter_var( $metronome[ 'root' ], FILTER_VALIDATE_INT );
-            if ( $pass )
-                Log::debug( 'metronome.root is integer.' );
-            else
+            if ( $pass === false )
                 Log::debug( 'metronome.root is not integer.' );
 
             $pass = filter_var( $metronome[ 'volume' ], FILTER_VALIDATE_INT );
-            if ( $pass )
-                Log::debug( 'metronome.volume is integer.' );
-            else
+            if ( $pass === false )
                 Log::debug( 'metronome.volume is not integer.' );
 
             $pass = filter_var( $metronome[ 'clickLength' ], FILTER_VALIDATE_FLOAT );
-            if ( $pass )
-                Log::debug( 'metronome.clickLength is float.' );
-            else
+            if ( $pass === false )
                 Log::debug( 'metronome.clickLength is not float.' );
 
             $pass = filter_var( $metronome[ 'waveType' ], FILTER_SANITIZE_STRING );
-            if ( $pass )
-                Log::debug( 'metronome.waveType is float.' );
-            else
+            if ( $pass === false )
                 Log::debug( 'metronome.waveType is not float.' );
 
             foreach( $metronome[ 'sequence' ] as $pad )
             {
                 $pass = filter_var( $pad, FILTER_VALIDATE_INT );
-                if ( $pass )
-                    Log::debug( 'metronome.sequence.pad is integer.' );
-                else
+                if ( $pass === false )
                     Log::debug( 'metronome.sequence.pad is not integer.' );
             }
 
@@ -164,35 +133,25 @@ class PublicChartRequest extends FormRequest
         *                       piano
         **********************************************************/
             $pass = filter_var( $piano[ 'volume' ], FILTER_VALIDATE_INT );
-            if ( $pass )
-                Log::debug( 'piano.volume is integer.' );
-            else
+            if ( $pass === false )
                 Log::debug( 'piano.volume is not integer.' );
 
             $pass = filter_var( $piano[ 'playableOctave' ], FILTER_VALIDATE_INT );
-            if ( $pass )
-                Log::debug( 'piano.playableOctave is integer.' );
-            else
+            if ( $pass === false )
                 Log::debug( 'piano.playableOctave is not integer.' );
 
             $pass = filter_var( $piano[ 'transpose' ], FILTER_VALIDATE_INT );
-            if ( $pass )
-                Log::debug( 'piano.transpose is integer.' );
-            else
+            if ( $pass === false )
                 Log::debug( 'piano.transpose is not integer.' );
 
             $pass = filter_var( $piano[ 'additionalNoteLength' ], FILTER_VALIDATE_INT );
-            if ( $pass )
-                Log::debug( 'piano.additionalNoteLength is integer.' );
-            else
+            if ( $pass === false )
                 Log::debug( 'piano.additionalNoteLength is not integer.' );
 
             foreach( $piano[ 'sequence' ] as $pad )
             {
                 $pass = filter_var( $pad, FILTER_VALIDATE_INT );
-                if ( $pass )
-                    Log::debug( 'piano.sequence.pad is integer.' );
-                else
+                if ( $pass === false )
                     Log::debug( 'piano.sequence.pad is not integer.' );
             }
 
@@ -206,16 +165,16 @@ class PublicChartRequest extends FormRequest
         if ( is_null( $vs ) )
             return false;
 
-        if ( $this->validate_state_engine( $vs[ 'engine' ] ) )
-            return true;
-        if ( $this->validate_state_globalState( $vs[ 'globalState' ] ) )
-            return true;
-        if ( $this->validate_state_chart( $vs[ 'chart' ] ) )
-            return true;
-        if ( $this->validate_state_instruments( $vs[ 'instruments' ] ) )
-            return true;
+        $pass = $this->validate_state_engine( $vs[ 'engine' ] );
+        $pass ? Log::debug( 'engine valid' ) : Log::debug( 'engine not valid' );
+        $pass = $this->validate_state_globalState( $vs[ 'globalState' ] );
+        $pass ? Log::debug( 'globalState valid' ) : Log::debug( 'globalState not valid' );
+        $pass = $this->validate_state_chart( $vs[ 'chart' ] );
+        $pass ? Log::debug( 'chart valid' ) : Log::debug( 'chart not valid' );
+        $pass = $this->validate_state_instruments( $vs[ 'instruments' ] );
+        $pass ? Log::debug( 'instruments valid' ) : Log::debug( 'instruments not valid' );
 
-        return false;
+        return $pass;
     }
 
     private function validate_title( $title ){
