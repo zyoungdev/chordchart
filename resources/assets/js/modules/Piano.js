@@ -45,7 +45,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
             // C  Db D  Eb E  F  Gb G  Ab A  Bb B
             // 00 01 02 03 04 05 06 07 08 09 10 11
             // 12 13 14 15 16 17 18 19 20 21 22 23
-            chords = {
+            qualities = {
                 // 1 3 5 maj 1
                 "\u25B3" : [0, 16, 7, 11, 12],
                 // 1 3 5 maj 9
@@ -351,7 +351,8 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
                 return;
 
             let root = notes[ Chart.getCurrentBar().chordName ],
-                chord = chords[ Chart.getCurrentBar().chordQuality ].slice();
+                // chord includes root
+                chord = qualities[ Chart.getCurrentBar().chordQuality ].slice();
 
             root += T.transpose;
 
