@@ -210,13 +210,13 @@ class PublicChartRequest extends FormRequest
 
     public function sanitize()
     {
-        $input = $this->all();
+        $request = $this->all();
 
-        $input[ 'hash' ] = filter_var( $input['hash'], FILTER_SANITIZE_STRING);
-        $input[ 'title' ] = filter_var( $input['title'], FILTER_SANITIZE_STRING);
-        $input[ 'description' ] = filter_var( $input['description'], FILTER_SANITIZE_STRING);
+        $request[ 'hash' ] = filter_var( $request['hash'], FILTER_SANITIZE_STRING);
+        $request[ 'title' ] = filter_var( $request['title'], FILTER_SANITIZE_STRING);
+        $request[ 'description' ] = filter_var( $request['description'], FILTER_SANITIZE_STRING);
 
-        $this->replace( $input );
+        $this->replace( $request );
     }
 
     /**
