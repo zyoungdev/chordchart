@@ -197,11 +197,11 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
         function buildEnvironment() {
             setupAnimationFrame();
-            T.setTempo( 120 );
             document.getElementById("loading").style.display = 'none';
             playButton = hf.get( "play" );
             selectedButton = hf.get( "navigation" ).getElementsByClassName( "activeButton" )[0];
 
+            T.setTempo( T.tempo );
             if ( gs.isRunning )
                 T.play();
         }
