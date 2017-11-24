@@ -46,6 +46,8 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
             // 00 01 02 03 04 05 06 07 08 09 10 11
             // 12 13 14 15 16 17 18 19 20 21 22 23
             qualities = {
+                // 1 3 5 1
+                "" : [0, 16, 7, 12],
                 // 1 3 5 maj 1
                 "\u25B3" : [0, 16, 7, 11, 12],
                 // 1 3 5 maj 9
@@ -347,8 +349,11 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
         },
 
         createNote: function( noteLength, start, stop, sequenceIndex ) {
-            if ( Chart.getCurrentBar().chordName === "" || Chart.getCurrentBar().chordQuality === "" )
+            if ( Chart.getCurrentBar().chordName === "" )
+            {
+                hf.log( "Error: No chord name" );
                 return;
+            }
 
             let root = notes[ Chart.getCurrentBar().chordName ],
                 // chord includes root
