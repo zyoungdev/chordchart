@@ -123,12 +123,12 @@ class ChartRequest extends FormRequest
             if ( $pass === false )
                 Log::warning( 'metronome.waveType is not float.' );
 
-            foreach( $metronome[ 'sequence' ] as $pad )
-            {
-                $pass = filter_var( $pad, FILTER_VALIDATE_INT );
-                if ( $pass === false )
-                    Log::warning( 'metronome.sequence.pad is not integer.' );
-            }
+            // foreach( $metronome[ 'sequence' ] as $pad )
+            // {
+                // $pass = filter_var( $pad, FILTER_VALIDATE_INT );
+                // if ( $pass === false )
+                    // Log::warning( 'metronome.sequence.pad is not integer.' );
+            // }
 
         /**********************************************************
         *                       piano
