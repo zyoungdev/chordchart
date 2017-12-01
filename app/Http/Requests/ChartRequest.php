@@ -149,12 +149,13 @@ class ChartRequest extends FormRequest
             if ( $pass === false )
                 Log::warning( 'piano.additionalNoteLength is not integer.' );
 
-            foreach( $piano[ 'sequence' ] as $pad )
-            {
-                $pass = filter_var( $pad, FILTER_VALIDATE_INT );
-                if ( $pass === false )
-                    Log::warning( 'piano.sequence.pad is not integer.' );
-            }
+            // Temporary fix until filter_var_array implemented
+            // foreach( $piano[ 'sequence' ] as $pad )
+            // {
+                // $pass = filter_var( $pad, FILTER_VALIDATE_INT );
+                // if ( $pass === false )
+                    // Log::warning( 'piano.sequence.pad is not integer.' );
+            // }
 
         return $pass;
     }
