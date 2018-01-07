@@ -21,15 +21,18 @@
     +e( a-100-fb, a-fb-c )
 
 .chartControls
-    +navigation-bar
+    width: 100%
     .center-container
-        +e( a-100-fb, a-null-cent )
+        +e( a-100-fb, a-fb-r, a-null-cent )
         .button
             +e( a-25 )
+            height: 30px
 
 .chartWorkspace
     +e( a-100-fb, a-fb-r, a-fb-jsa )
     margin-top: 10px
+    overflow-y: auto
+    height: 74vh
 
 .bar
     +e( cur-p, pos-r, bxz-bb )
@@ -39,8 +42,8 @@
     border: solid 5px rgba( 0,0,0,0 )
     padding: 0.2em
     +tablet
-        width: 12.3vw
-        height: 12.3vw
+        width: 11.8vw
+        height: 11.8vw
 
 .barContainer
     +e( d-tb )

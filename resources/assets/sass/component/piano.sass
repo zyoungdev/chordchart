@@ -7,7 +7,7 @@
             background-color: $dark_black
 
     .pianoControls
-        +navigation-bar
+        +e( a-100 )
         .center-container
             +e( a-75-fb, a-fb-r )
             background-color: $dark_black
@@ -46,7 +46,10 @@
                 border-radius: 50%
 
     .pianoSequenceControls
-        +navigation-bar
-        width: 33.333%
-        height: 100%
+        min-height: 100%
+        width: 33%
+        .center-container
+            height: 100%
+        .button
+            height: 100%
 
