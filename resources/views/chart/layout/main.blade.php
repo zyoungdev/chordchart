@@ -19,11 +19,9 @@
     @include( 'chart.component.flash' )
 
     <div id="main-grid" class="main-grid">
-        @include ( 'chart.component.navigation' )
+        @include ( 'chart.component.leftbar' )
 
         <div id="workspace" class="workspace">
-            @include ( 'chart.component.transport' )
-
             @include ( 'chart.component.mixer' )
 
             @include ( 'chart.component.metronome' )
