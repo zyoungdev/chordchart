@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use \App\Chart;
 use \App\User;
 use \Illuminate\Support\Facades\Auth;
@@ -45,7 +46,7 @@ class ChartController extends Controller
     }
 
     public function show( $hash ) {
-        $chart = Chart::where( 'hash', $hash )->first();
+        $chart = Chart::where(DB::raw('BINARY `hash`'), $hash )->first();
 
         if ( ! $chart )
             return redirect( '/' )->with([
@@ -73,7 +74,7 @@ class ChartController extends Controller
     }
 
     public function update( ChartRequest $request, $hash ) {
-        $chart = Chart::where( 'hash', $hash )->first();
+        $chart = Chart::where(DB::raw('BINARY `hash`'), $hash )->first();
 
         if ( ! $chart )
             return redirect( '/' )->with([
