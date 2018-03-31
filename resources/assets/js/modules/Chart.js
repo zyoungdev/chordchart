@@ -209,8 +209,15 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
          *           Cut, Copy, Delete, Paste
          ***************************************************/
             function copyBar( e ) {
+                let i = Array.from( selectedBar.parentNode.children ).indexOf( selectedBar ),
+                    model = T.bars[i],
+                    view = selectedBar;
+
                 if ( e.ctrlKey )
-                    copyBuffer = selectedBar;
+                    copyBuffer = {
+                        model: model,
+                        view: view
+                    };
             }
 
             function cutBar( e ) {
@@ -222,11 +229,22 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 if ( !e.ctrlKey )
                     return;
 
-                let newBar = copyBuffer.cloneNode( true );
+                let newBar = copyBuffer.view.cloneNode( true );
+                newBar.classList.remove( "barSelected" );
                 setBarListeners( newBar );
 
+                // Add bar to model
+                let i = Array.from( selectedBar.parentNode.children ).indexOf( selectedBar );
+                T.bars.splice( i + 1, 0, { element: newBar,
+                                       rhythm: copyBuffer.model.rhythm,
+                                       chordName: copyBuffer.model.chordName,
+                                       chordQuality: copyBuffer.model.chordQuality } );
+
+                // Add bar to view
                 selectedBar.parentNode.insertBefore(
                     newBar, selectedBar.nextSibling );
+
+                resetBarNumbers();
             }
 
             function deleteSelectedBar() {
