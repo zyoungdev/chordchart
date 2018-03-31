@@ -7,23 +7,18 @@
     +desktop
         width: 95vw
         height: 100vh
-    .link-title
-        color: $white
 
     .details-link
         +e( a-100, cur-p )
-        background-color: lighten( $dark_black, 10% )
-        margin-bottom: 2em
-        height: 3em 
-        &:hover
-            background-color: lighten( $dark_black, 30% )
-        .link-title
-            +e( a-20, ta-r )
-            font-size: 1.3em
-            padding-right: 10px
-            margin: 0
+        background-color: $color1
+        color: $white
+        &:hover a
+            background-color: $color2
+            color: $black
         a
-            +e( a-80, ta-l )
-            font-size: 1.3em
+            +e( a-100, ta-c )
             color: $white
+            height: 100%
+            font-size: 1.3em
+            line-height: 5vh
             text-decoration: none
