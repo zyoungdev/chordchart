@@ -3,6 +3,7 @@
     width: 100vw
     grid-area: b
     height: 95vh
+    align-content: baseline
     +desktop
         width: 95vw
         height: 100vh
@@ -15,6 +16,12 @@
             +e( a-50-fb, a-fb-jsa, a-fb-jc, d-20-fb )
             height: 50px
             text-align: center
+        .button
+            background-color: $color1
+            color: $white
+            &:hover
+                background-color: $color2
+                color: $black
 
     .metronome-input
         text-align-last: center
@@ -33,7 +40,7 @@
         margin-bottom: 20px
 
     .metronomeSequence > div > div,
-        +e( pos-r )
+        +e( pos-r, cur-p )
         +e( a-cent-null )
         width: 6vw
         height: 6vw

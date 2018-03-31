@@ -283,6 +283,9 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
 
             newPad.classList.add( "pianoPad", "pad" );
 
+            if ( pads.length >= 16 )
+                return;
+
             if ( pads.length % 4 === 0 )
             {
                 let newBlock = document.createElement( "div" );
@@ -300,7 +303,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
             let pianoSequence = hf.get( "pianoSequenceContainer" ),
                 pads = pianoSequence.getElementsByClassName( "pianoPad" );
 
-            if ( pads.length >= 1 )
+            if ( pads.length > 1 )
             {
                 let lastPad = pads[ pads.length - 1 ];
 

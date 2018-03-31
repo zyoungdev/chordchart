@@ -111,6 +111,9 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
 
             newPad.classList.add( "metronomePad" );
 
+            if ( pads.length >= 16 )
+                return;
+
             if ( pads.length % 4 === 0 )
             {
                 let newBlock = document.createElement( "div" );
@@ -128,7 +131,7 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
             let metronomeSequence = hf.get( "metronomeSequence" ),
                 pads = metronomeSequence.getElementsByClassName( "metronomePad" );
 
-            if ( pads.length >= 1 )
+            if ( pads.length > 1 )
             {
                 let lastPad = pads[ pads.length - 1 ];
 
