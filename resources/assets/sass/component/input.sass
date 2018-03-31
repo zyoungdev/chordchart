@@ -2,15 +2,16 @@
     +e( a-100, a-p-5 )
     width: auto
     border: solid 1px rgba( $white, 0.1 )
-    height: 100%
     span, select
+        width: 100%
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
         +e( a-50 )
-        height: 100%
 
 .num-input
     height: 100%
     text-align: center
-    font-size: 1.5em
     border: none
     border-radius: $border_radius
     &::-webkit-inner-spin-button,

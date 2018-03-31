@@ -1,6 +1,24 @@
 @mixin navigation-bar
 
-.navigation
-    flex-wrap: nowrap
-    +navigation-bar
-
+.navigation, .transport
+    +e( a-100-fb, a-fb-jc, d-fb-c )
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    width: 97%
+    +tablet
+        height: 5vh
+    +desktop
+        height: 98vh
+        width: 5vw
+        margin-top: 2vh
+    .button
+        height: 100%
+        font-size: 0.6em
+        +desktop
+            white-space: nowrap
+            overflow: hidden
+            text-overflow: ellipsis
+            height: initial
+            width: 100%
+            font-size: 1em

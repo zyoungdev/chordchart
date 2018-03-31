@@ -1,6 +1,8 @@
 <div id="metronome" class="metronome hide">
     <div id="metronomeControls" class="metronomeControls">
+        <!--
         <div class="center-container">
+        -->
             <button id="metronomeSub" class="metronomeSub button">-</button>
             <button id="metronomeAdd" class="metronomeAdd button">+</button>
             <label class="input-container">
@@ -39,7 +41,9 @@
                 </select>
                 </select>
             </label>
+        <!--
         </div>
+        -->
     </div>
     <div id="metronomeSequence" class="metronomeSequence"></div>
 </div>

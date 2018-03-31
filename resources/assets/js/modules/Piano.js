@@ -99,7 +99,9 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
                 "h": 9,
                 "u": 10,
                 "j": 11,
-                "k": 12
+                "k": 12,
+                "l": 0,
+                ":": 1
             },
 
             keyDownMap = {

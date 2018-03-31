@@ -15,6 +15,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
      ***************************************************/
         let nextSequenceTime = 0.0,
             playButton = {},
+            navOrTransport = false,
             selectedButton = false,
             selectedBarNum = 0,
             oneBar = 0,
@@ -253,6 +254,25 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
                     document.getElementById( buttonText ).classList.remove( "hide" );
                 }
+                else if ( hf.isInside( e.target, hf.get( "hamburger" ) ) )
+                {
+                    let button = e.target,
+                        nav = hf.get( "navigation" ),
+                        trans = hf.get( "transport" );
+
+                    if ( navOrTransport )
+                    {
+                        nav.classList.add( "hide" );
+                        trans.classList.remove( "hide" );
+                    }
+                    else
+                    {
+                        trans.classList.add( "hide" );
+                        nav.classList.remove( "hide" );
+                    }
+
+                    navOrTransport = !navOrTransport;
+                }
                 else if ( e.target.id ===  "transportSave")
                 {
                     let saveButton = hf.get( "submitChart" );
@@ -320,7 +340,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
             gs.isRunning = true;
 
             // Set play button to red, set text to Stop
-            playButton.style.backgroundColor = "rgba( 150,50,50,1 )";
+            playButton.style.backgroundColor = "rgba( 134,22,53,1 )";
             playButton.innerHTML = "Stop";
 
             requestAnimFrame( reqFrame );
@@ -332,7 +352,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
             gs.isRunning = false;
 
             // Set play button to Green, set text to Play
-            playButton.style.backgroundColor = "rgba( 50,150,50,1 )";
+            playButton.style.backgroundColor = "rgba( 134,22,87,1 )";
             playButton.innerHTML = "Play";
 
             T.NotesAllOff();

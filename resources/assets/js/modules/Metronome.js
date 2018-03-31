@@ -7,7 +7,7 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
         T = this;
         this.sequence = [1,1,1,1];
         this.root = 0;
-        this.volume = 1.0;
+        this.volume = 0.0;
         this.waveType = "sine";
         this.clickLength = 0.0001;
     }

@@ -21,17 +21,21 @@
     <div id="main-grid" class="main-grid">
         @include ( 'chart.component.leftbar' )
 
+        <!--
         <div id="workspace" class="workspace">
-            @include ( 'chart.component.mixer' )
+        -->
+        @include ( 'chart.component.mixer' )
 
-            @include ( 'chart.component.metronome' )
+        @include ( 'chart.component.metronome' )
 
-            @include ( 'chart.component.piano' )
+        @include ( 'chart.component.piano' )
 
-            @include ( 'chart.component.chart' )
+        @include ( 'chart.component.chart' )
 
-            @include ( 'chart.component.details' )
+        @include ( 'chart.component.details' )
+        <!--
         </div>
+        -->
     </div>
         
     @include ( 'chart.component.notice' )

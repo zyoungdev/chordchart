@@ -1,11 +1,41 @@
 .leftbar
-    +e( a-100-fb, a-fb-c, ov-h )
-    height: 100vh
-    width: 100px
-    background-color: darken( $dark_blue, 15% )
-    border-bottom: solid 1px lighten( $dark_black, 20% )
-    .center-container
-        +e( a-100-fb, a-fb-c )
-    .button
-        height: 30px
-        width: 100%
+    +e( a-100-fb, a-fb-r, d-fb-c, d-fb-jc )
+    flex-wrap: wrap
+    height: 5vh
+    background-color: rgba( 255,255,255, 0.7 )
+    grid-area: a
+    display: grid
+    grid-template: "c d d" "c d d"
+    grid-template-columns: 3vw 95vw
+    box-shadow: 0 5px 5px rgba( 50,50,50,0.3 )
+    margin: 5px 0 5px 0
+    width: 95vw
+    +tablet
+        height: 5vh
+    +desktop
+        margin: 0 5px 0 5px
+        grid-template: "c" "d" "d"
+        height: 100vh
+        width: 5vw
+    .hamburger
+        +e( a-10-fb, a-fb-r, a-fb-jc, a-fb-ac, a-p-5, cur-p, d-fb-r, d-fb-jsa )
+        &:hover div
+            background-color: #ffa69e
+        width: 3vh
+        height: 5vh
+        +mobile-landscape
+            width: 2vh
+        +tablet
+            height: 5vh
+        +desktop
+            position: absolute
+            height: 1vh
+            width: 5vw
+        div
+            background: #861657
+            width: 75%
+            height: 20%
+            +desktop
+                width: 0.5vw
+                height: 0.5vw
+            border-radius: 50%

@@ -1,17 +1,20 @@
 .metronome
     +e( a-100-fb )
+    width: 100vw
+    grid-area: b
+    height: 95vh
+    +desktop
+        width: 95vw
+        height: 100vh
 
     .metronomeControls
-        +e( a-100 )
-        color: $white
-        background-color: lighten( $dark_black, 5% )
+        +e( a-100-fb, a-fb-r, a-fb-w )
+        align-content: baseline
+        color: $black
         .input-container, .button
-            +e( a-20-fb, a-fb-jsa, a-fb-jc )
-            height: 100%
+            +e( a-50-fb, a-fb-jsa, a-fb-jc, d-20-fb )
+            height: 50px
             text-align: center
-        .center-container
-            +e( a-100-fb )
-            height: 100%
 
     .metronome-input
         text-align-last: center
@@ -22,17 +25,18 @@
         border-color: pink
 
     .metronomeSequence > div,
-        +e( a-45-fb )
+        +e( a-50-fb )
         +e( a-fb-jsa )
         +e( a-fb-r )
         height: 12vw
+        width: 50vw
         margin-bottom: 20px
 
     .metronomeSequence > div > div,
         +e( pos-r )
         +e( a-cent-null )
-        width: 18%
-        height: 70%
+        width: 6vw
+        height: 6vw
         background-color: rgba(255,255,255, 0.6)
         border: solid 10px rgba(255,255,255, 0.0)
         border-radius: 50%

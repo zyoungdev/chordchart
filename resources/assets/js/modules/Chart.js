@@ -310,7 +310,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 newBar.classList.add( "bar" );
                 newBar.innerHTML =
                     "<div class=\"barContainer\">" +
-                        "<div class=\"rhythmNumber\">R1</div>" +
+                        // "<div class=\"rhythmNumber\">R1</div>" +
                         "<div class=\"barChord\"></div>" +
                         "<div class=\"barNumber\"></div>" +
                     "</div>";

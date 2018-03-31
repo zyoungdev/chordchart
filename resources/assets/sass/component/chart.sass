@@ -1,74 +1,118 @@
-.notes
-    +e( d-tb )
-    width: 100%
+.notes, .noteQualities
+    +e( a-100-fb, gradient )
+    flex-wrap: wrap !important
+    width: 100vw
     border-spacing: 1vw
-.noteQualities
-    width: 100%
-
-.noteQualities > div
-    +e( d-tb )
-    width: 100%
-    border-spacing: 1vw
+    flex-flow: row
+    box-shadow: inset 0 0 40px rgba( 50,50,50,0.2 ), inset 0 0 10px rgba( 50,50,50,0.4 )
 
 .note, .quality
     +e( d-tbc )
-    +e( va-m, ta-c, cur-p )
-    width: 7vw
-    height: 7vw
+    +e( ta-c, cur-p )
+    margin: 1vh
+    min-width: 13.1vw
+    line-height: 13.1vw
+    font-size: 0.8em
+    border-radius: 50%
+    box-shadow: 0 5px 5px rgba( 50,50,50,0.5 )
+    +tablet
+        line-height: 6.4vw
+        min-width: 6.4vw
+        height: 6.4vw
+        vertical-align: center
+        font-size: 1em
+    +desktop
+        line-height: 6.7vw
+        min-width: 6.7vw
+        height: 6.7vw
     background-color: $white
 
 .chart
     +e( a-100-fb, a-fb-c )
+    grid-area: b
+    width: 100vw
+    background: rgba( 200,200,200,1 )
+
+.chordContainer
+    +e( d-tb )
+    width: 100vw
+
 
 .chartControls
-    width: 100%
-    .center-container
-        +e( a-100-fb, a-fb-r, a-null-cent )
-        .button
-            +e( a-25 )
-            height: 30px
+    +e( a-100-fb, a-fb-r, a-fb-jc )
+    width: 95vw
+    justify-content: center
+    justify-items: center
+    .button
+        +e( a-25 )
+        width: 21.7%
+        background-color: rgba( 255,255,255,0.5 )
+        height: 30px
+        font-size: 0.6em
+        color: $black
+        border-radius: 3px
+        box-shadow: 0 5px 5px rgba( 50,50,50,0.3 )
+        margin: 5px
+        &:hover
+            background-color: #861657
+            color: $white
+        +tablet
+            font-size: 1em
+        +desktop
+            width: 22.8%
 
 .chartWorkspace
-    +e( a-100-fb, a-fb-r, a-fb-jfs )
+    +e( a-100-fb, a-fb-w, d-tb, a-fb-jc )
     align-content: baseline
-    margin-top: 10px
     overflow-y: auto
     height: 74vh
+    width: 95vw
 
 .bar
-    +e( cur-p, pos-r, bxz-bb )
-    width: 22vw
-    height: 22vw
-    margin-bottom: 5px
+    width: 18vw
+    height: 10vw
     border: solid 5px rgba( 0,0,0,0 )
     padding: 0.2em
     +tablet
-        width: 11.7vw
-        height: 11.7vw
+        width: 10.5vw
+        height: 6vw
+        font-size: 1em
 
 .barContainer
-    +e( d-tb )
-    background-color: rgba(255,255,255,.5)
+    +e( ta-c )
+    background-color: rgba(255,255,255,0.5)
+    box-shadow: 0 5px 5px rgba( 50,50,50,0.5 )
     width: 100%
     height: 100%
+    font-size: 0.8em
+    +tablet
+      font-size: 1em
 
 .barChord
-    +e( d-tbc )
-    height: 80%
+    height: 60%
+    line-height: 8vw
+    color: $black
+    +tablet
+        line-height: 5vw
+        height: 80%
 
 .barSelected
     border: solid 5px magenta
 
 .barPlaying
+    color: $white
     .barContainer
-        background-color: rgba( 255,255,255,1 )
+        background: #861657
+        background: #a33a68
+
+    .barChord
+        color: $white
 
 .dragging
     opacity: 0.2
     border: solid 5px magenta
 
 .dragOverlay
-    +e( a-100-fb, a-fb-r, pos-a )
     top: 0
     height: 100%
     div
@@ -89,12 +133,19 @@
     border: solid 5px $orange
 
 .rhythmNumber, .barChord, .barNumber
-    +e( d-tbr, ta-c, va-m )
     width: 100%
 
 .rhythmNumber, .barNumber
-    height: 10%
-    background-color: rgba( 50, 100, 200, 1 )
+    +e( ta-r, bxz-bb )
+    height: 40%
+    background-color: rgba( 50, 50, 50, 0.1 )
+    font-size: 0.6em
+    padding: 0 5px 5px 0
+    +tablet
+        font-size: 0.8em
+        height: 20%
+    +desktop
+        font-size: 1em
 
 .playing
     background-color: rgba( 255,255,255,1 ) !important

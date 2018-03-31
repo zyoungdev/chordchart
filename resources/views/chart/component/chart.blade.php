@@ -15,7 +15,9 @@
             <div class="note">G</div>
         </div>
         <div id="noteQualities" class="noteQualities hide">
+            <!--
             <div>
+            -->
                 <div class="quality">&#9651;</div>
                 <div class="quality">&#9651;9</div>
                 <div class="quality">7</div>
@@ -25,8 +27,10 @@
                 <div class="quality">&#216;</div>
                 <div class="quality">O</div>
                 <div class="quality">-&#9651;</div>
+            <!--
             </div>
             <div>
+            -->
                 <div class="quality">&#9651;#5</div>
                 <div class="quality">7#11</div>
                 <div class="quality">7#9</div>
@@ -36,16 +40,22 @@
                 <div class="quality">-7b9</div>
                 <div class="quality">Maj</div>
                 <div class="quality">Min</div>
+            <!--
             </div>
+            -->
         </div>
     </div>
     <div id="chartControls" class="chartControls">
+        <!--
         <div class="center-container">
+        -->
             <button id="subBar" class="subBar button">Remove Bar</button>
             <button id="addBar" class="addBar button">Add Bar</button>
             <button id="clearBar" class="clearBar button">Clear Bar</button>
             <button id="clearScore" class="clearScore button">Clear Score</button>
+        <!--
         </div>
+        -->
     </div>
     <div id="chartWorkspace" class="chartWorkspace"></div>
 </div>
