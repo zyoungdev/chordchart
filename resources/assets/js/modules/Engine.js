@@ -295,6 +295,17 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
                     hf.toast( "Chart link copied to clipboard" );
                 }
+                // else if ( hf.isInside( e.target, "chartWorkspace" ) )
+                else if ( e.target.id === "chartWorkspace" )
+                {
+                    if ( gs.isRunning )
+                        T.stop();
+                    else
+                        T.play()
+
+                    console.log( "main-grid" );
+                    // gs.isRunning = ! gs.isRunning
+                }
             }
         }
 

@@ -1,3 +1,6 @@
+$barOutline: 1vw
+$orange: $black
+
 .notes, .noteQualities
     +e( a-100-fb, gradient, a-fb-jc )
     flex-wrap: wrap !important
@@ -11,8 +14,8 @@
 .note, .quality
     +e( d-tbc )
     +e( ta-c, cur-p )
-    margin: 1vh
-    min-width: 13.1vw
+    margin: 0.5vw
+    min-width: 13.3vw
     line-height: 13.1vw
     font-size: 0.8em
     border-radius: 50%
@@ -42,12 +45,11 @@
 
 .chartControls
     +e( a-100-fb, a-fb-r, a-fb-jc )
-    width: 95vw
     justify-content: center
     justify-items: center
     .button
         +e( a-25 )
-        width: 21.7%
+        width: 21.4%
         background-color: rgba( 255,255,255,0.5 )
         height: 30px
         font-size: 0.6em
@@ -60,32 +62,34 @@
             color: $white
         +tablet
             font-size: 1em
-        +desktop
-            width: 22.8%
 
 .chartWorkspace
     +e( a-100-fb, a-fb-w, d-tb, a-fb-jc )
-    align-content: baseline
+    justify-content: start
     overflow-y: auto
     height: 74vh
-    width: 95vw
+    align-content: baseline
 
 .bar
-    width: 18vw
+    width: 23vw
     height: 10vw
-    border: solid 5px rgba( 0,0,0,0 )
-    padding: 0.2em
-    +tablet
-        width: 10.5vw
+    border: solid $barOutline rgba( 0,0,0,0 )
+    // +mobile-landscape
+        // width: 10.2vw
+    // +tablet
+        // width: 10.5vw
+        // height: 6vw
+        // font-size: 1em
+    +desktop
+        width: 9.9vw
         height: 6vw
-        font-size: 1em
 
 .barContainer
-    +e( ta-c )
+    +e( ta-c, a-cent-cent )
     background-color: rgba(255,255,255,0.5)
     box-shadow: 0 5px 5px rgba( 50,50,50,0.5 )
-    width: 100%
-    height: 100%
+    width: 90%
+    height: 90%
     font-size: 0.8em
     +tablet
       font-size: 1em
@@ -99,7 +103,7 @@
         height: 80%
 
 .barSelected
-    border: solid 5px magenta
+    border: solid $barOutline $color1
 
 .barPlaying
     color: $white
@@ -112,7 +116,7 @@
 
 .dragging
     opacity: 0.2
-    border: solid 5px magenta
+    border: solid $barOutline magenta
 
 .dragOverlay
     top: 0
@@ -123,16 +127,19 @@
         background-color: $orange
         opacity: 0
 
+$transparent: rgba( 255,255,255,0 )
 .dropSelectedLeft
-    border: solid 5px $white
-    border-left: solid 5px $orange
+    border: solid $barOutline $transparent
+    // border: none
+    border-left: solid $barOutline $orange
 
 .dropSelectedRight
-    border: solid 5px $white
-    border-right: solid 5px $orange
+    border: solid $barOutline $transparent
+    // border: none
+    border-right: solid $barOutline $orange
 
 .dropSelected
-    border: solid 5px $orange
+    border: solid $barOutline $transparent
 
 .rhythmNumber, .barChord, .barNumber
     width: 100%
@@ -146,5 +153,3 @@
     +tablet
         font-size: 0.8em
         height: 20%
-    +desktop
-        font-size: 1em

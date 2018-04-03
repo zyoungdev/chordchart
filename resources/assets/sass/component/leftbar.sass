@@ -17,6 +17,8 @@
         grid-template: "c" "d" "d"
         height: 100vh
         width: 5vw
+        $shadowBlack: rgba( 50,50,50,0.5 )
+        box-shadow: inset 0 10px 20px $shadowBlack, inset 0 0 5px $shadowBlack
     .hamburger
         +e( a-10-fb, a-fb-r, a-fb-jc, a-fb-ac, a-p-5, cur-p, d-fb-r, d-fb-jsa )
         &:hover div
@@ -24,6 +26,7 @@
         width: 3vh
         height: 5vh
         grid-area: c
+        align-items: start
         +mobile-landscape
             width: 2vh
         +tablet

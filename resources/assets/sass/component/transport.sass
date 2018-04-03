@@ -2,29 +2,41 @@
     +e( a-95-fb, a-fb-r, a-fb-jsa, a-fb-jc, a-fb-ac )
     +e( d-fb-c, d-fb-as, d-100-fb )
     grid-area: d
+
+    justify-content: space-around
+    width: 90%
     +desktop
         align-content: space-around
+        justify-content: center
         height: 97vh
+        width: 100%
+
 
     .button
         font-size: 0.6em
+        width: 15%
+        margin: 0 auto
         +tablet
             font-size: 0.8em
         +desktop
             font-size: 1em
     .button, .tempo
-        height: 50%
+        height: 80%
         border-radius: 3px
+        box-shadow: 0 3px 3px rgba( 50,50,50,0.5 )
         +desktop
             height: 100px
+            width: 100%
+            box-shadow: inset 0 3px 3px rgba( 50,50,50,0.5 )
+    .tempo
+        width: 50%
+        +desktop
             width: 100%
     .input-container
         color: $white
         padding: 0
         button, label
             border: none
-    .num-input
-        height: 15
     #play
         background-color: $color1
         color: $white

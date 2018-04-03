@@ -153,7 +153,13 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 resetBarBorders();
 
                 // Done dragging, remove dragging CSS
-                draggedBarElement.classList.remove( "dragging" );
+                for ( let i = 0; i < bars.length; i++ )
+                {
+
+                    bars[ i ].classList.remove( "dragging" );
+
+                    // draggedBarElement.classList.remove( "dragging" );
+                }
 
                 // Don't do anything if dropped on same element
                 if ( draggedBarElement === overBarElement )
