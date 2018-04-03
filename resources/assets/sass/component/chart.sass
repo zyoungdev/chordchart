@@ -42,6 +42,10 @@ $orange: $black
     +e( d-tb )
     width: 100vw
 
+.chordContainerScrolling
+    position: fixed
+    z-index: 99
+    top: 0px
 
 .chartControls
     +e( a-100-fb, a-fb-r, a-fb-jc )
@@ -62,6 +66,11 @@ $orange: $black
             color: $white
         +tablet
             font-size: 1em
+
+.chartControlsScrolling
+    position: fixed
+    z-index: 99
+    background: white
 
 .chartWorkspace
     +e( a-100-fb, a-fb-w, d-tb, a-fb-jc )

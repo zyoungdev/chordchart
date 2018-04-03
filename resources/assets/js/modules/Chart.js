@@ -62,18 +62,36 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             let lastScroll = 0;
+            let isScrolling = false;
             function scroll( e ) {
                 let pos = document.body.pageYOffset || document.body.scrollTop;
 
                 if ( pos > lastScroll )
                 {
-                    hf.get( "chordContainer" ).style.display = "none";
-                    hf.get( "chartControls" ).style.display = "none";
+                    if ( ! isScrolling )
+                    {
+                        let notes = hf.get( "chordContainer" ),
+                            controls = hf.get( "chartControls" ),
+                            notesRect = notes.getBoundingClientRect();
+
+                        notes.classList.add( "chordContainerScrolling" );
+                        controls.classList.add( "chartControlsScrolling" );
+                        controls.style.top = notesRect.height + "px";
+
+                        isScrolling = true;
+                    }
                 }
-                else
+                else if ( pos === 0 )
                 {
-                    hf.get( "chordContainer" ).style.display = "table";
-                    hf.get( "chartControls" ).style.display = "flex";
+                    let notes = hf.get( "chordContainer" ),
+                        controls = hf.get( "chartControls" ),
+                        notesRect = notes.getBoundingClientRect();
+
+                    notes.classList.remove( "chordContainerScrolling" );
+                    controls.classList.remove( "chartControlsScrolling" );
+                    controls.style.top = "initial";
+
+                    isScrolling = false;
                 }
 
                 lastScroll = pos;
