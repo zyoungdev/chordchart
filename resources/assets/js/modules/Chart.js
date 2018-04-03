@@ -42,17 +42,15 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
          *               Listeners
          ***************************************************/
             function setListeners() {
-                let chart = hf.get( "chart" ),
-                    bars = hf.getElByCN( "bar" );
+                let chart = hf.get( "chart" );
 
                 chart.addEventListener( "mousedown", mousedown );
                 chart.addEventListener( "mouseup", mouseup );
                 window.addEventListener( "keydown", keydown );
                 window.addEventListener( "keyup", keyup );
 
-
-                Array.prototype.forEach.call( bars, function( bar ) {
-                    setBarListeners( bar );
+                Array.prototype.forEach.call( T.bars, function( bar ) {
+                    setBarListeners( bar.element );
                 } );
             }
 
