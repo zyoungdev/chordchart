@@ -72,11 +72,14 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     {
                         let notes = hf.get( "chordContainer" ),
                             controls = hf.get( "chartControls" ),
+                            bars = hf.get( "chartWorkspace" ),
+                            controlsRect = controls.getBoundingClientRect(),
                             notesRect = notes.getBoundingClientRect();
 
                         notes.classList.add( "chordContainerScrolling" );
                         controls.classList.add( "chartControlsScrolling" );
                         controls.style.top = notesRect.height + "px";
+                        bars.style.top = ( notesRect.height + controlsRect.height ) + "px";
 
                         isScrolling = true;
                     }
@@ -85,11 +88,13 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 {
                     let notes = hf.get( "chordContainer" ),
                         controls = hf.get( "chartControls" ),
+                        bars = hf.get( "chartWorkspace" ),
                         notesRect = notes.getBoundingClientRect();
 
                     notes.classList.remove( "chordContainerScrolling" );
                     controls.classList.remove( "chartControlsScrolling" );
                     controls.style.top = "initial";
+                    bars.style.top = "initial";
 
                     isScrolling = false;
                 }
