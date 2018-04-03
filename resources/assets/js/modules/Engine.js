@@ -218,6 +218,28 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 requestAnimFrame( reqFrame );
         }
 
+        let fullscreen = true,
+            viewingChart = true;
+
+        function showHideNotes()
+        {
+            let notes = hf.get( "chordContainer" ),
+                controls = hf.get( "chartControls" );
+
+            if ( fullscreen )
+            {
+                notes.classList.add( "hide" );
+                controls.classList.add( "hide" );
+            }
+            else
+            {
+                notes.classList.remove( "hide" );
+                controls.classList.remove( "hide" );
+            }
+
+            fullscreen = ! fullscreen;
+        }
+
         function mousedown( e ) {
             if ( e.which === 1 )
             {
@@ -252,7 +274,13 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                             page.classList.add( "hide" );
                     }
 
+                    // Show correct Page
                     document.getElementById( buttonText ).classList.remove( "hide" );
+
+                    if ( viewingChart && buttonText === "chart" )
+                        showHideNotes();
+                    else
+                        viewingChart = ! viewingChart;
                 }
                 else if ( hf.isInside( e.target, hf.get( "hamburger" ) ) )
                 {
@@ -295,16 +323,12 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
                     hf.toast( "Chart link copied to clipboard" );
                 }
-                // else if ( hf.isInside( e.target, "chartWorkspace" ) )
                 else if ( e.target.id === "chartWorkspace" )
                 {
                     if ( gs.isRunning )
                         T.stop();
                     else
                         T.play()
-
-                    console.log( "main-grid" );
-                    // gs.isRunning = ! gs.isRunning
                 }
             }
         }
@@ -351,7 +375,8 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
             gs.isRunning = true;
 
             // Set play button to red, set text to Stop
-            playButton.style.backgroundColor = "rgba( 134,22,53,1 )";
+            playButton.style.backgroundColor = "rgba( 255,166,158 )";
+            playButton.style.color = "rgb( 50,50,50 )";
             playButton.innerHTML = "Stop";
 
             requestAnimFrame( reqFrame );
@@ -364,7 +389,11 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
             // Set play button to Green, set text to Play
             playButton.style.backgroundColor = "rgba( 134,22,87,1 )";
+            playButton.style.color = "rgb( 200,200,200 )";
+
             playButton.innerHTML = "Play";
+
+            Chart.resetRepeats();
 
             T.NotesAllOff();
         },

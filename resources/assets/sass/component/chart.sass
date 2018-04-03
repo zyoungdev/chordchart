@@ -74,15 +74,40 @@ $orange: $black
     width: 23vw
     height: 10vw
     border: solid $barOutline rgba( 0,0,0,0 )
-    // +mobile-landscape
-        // width: 10.2vw
-    // +tablet
-        // width: 10.5vw
-        // height: 6vw
-        // font-size: 1em
     +desktop
-        width: 9.9vw
+        border: solid $barOutline / 2 rgba( 0,0,0,0 )
+        width: 10.9vw
         height: 6vw
+
+    .barFooter
+        display: flex
+        flex-direction: row
+        align-items: center
+        align-content: center
+        justify-content: space-around
+    .repeatContainer
+        display: flex
+        flex-direction: row
+        flex-wrap: nowrap
+        justify-content: space-around
+        align-content: center
+        align-items: center
+        padding: 2px
+        width: 30%
+        height: 70%
+    .barPlug
+        background: $black
+        border-radius: 50%
+        width: 50%
+        height: 100%
+        box-shadow: 0 1px 1px $black
+        +desktop
+            width: 35%
+    .barRepeat
+        width: 50%
+        text-align: center
+    .number
+        width: 50%
 
 .barContainer
     +e( ta-c, a-cent-cent )
@@ -104,6 +129,9 @@ $orange: $black
 
 .barSelected
     border: solid $barOutline $color1
+    +desktop
+        border: solid $barOutline / 2 $color1
+        
 
 .barPlaying
     color: $white
@@ -130,26 +158,26 @@ $orange: $black
 $transparent: rgba( 255,255,255,0 )
 .dropSelectedLeft
     border: solid $barOutline $transparent
-    // border: none
     border-left: solid $barOutline $orange
 
 .dropSelectedRight
     border: solid $barOutline $transparent
-    // border: none
     border-right: solid $barOutline $orange
 
 .dropSelected
     border: solid $barOutline $transparent
 
-.rhythmNumber, .barChord, .barNumber
+.rhythmNumber, .barChord, .barNumber, .barFooter
     width: 100%
 
-.rhythmNumber, .barNumber
+.rhythmNumber, .barNumber, .barFooter
     +e( ta-r, bxz-bb )
     height: 40%
     background-color: rgba( 50, 50, 50, 0.1 )
     font-size: 0.6em
-    padding: 0 5px 5px 0
     +tablet
         font-size: 0.8em
         height: 20%
+.plugActive
+    background: $color2 !important
+    box-shadow: inset 0 2px 2px rgba( 50,50,50,0.5 ) !important

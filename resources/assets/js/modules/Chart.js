@@ -79,7 +79,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
 
                 for ( let i = 0; i < bars.length; i++ )
                 {
-                    let barNum = bars[ i ].getElementsByClassName( "barNumber" )[0];
+                    let barNum = bars[ i ].getElementsByClassName( "number" )[0];
                     barNum.innerHTML = i + 1;
                 }
             }
@@ -104,7 +104,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
 
                 if ( !gs.isRunning )
                 {
-                    let barNumElement = bar.getElementsByClassName( "barNumber" )[ 0 ];
+                    let barNumElement = bar.getElementsByClassName( "number" )[ 0 ];
                     barNumber = parseInt( barNumElement.innerHTML ) - 1;
                 }
             }
@@ -321,7 +321,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
          ***************************************************/
             function addModelBar( index, barElement ) {
                 // Add new bar to model
-                T.bars.splice( index, 0, { element: barElement, rhythm: [], chordName: "", chordQuality: "" } );
+                T.bars.splice( index, 0, { element: barElement, rhythm: [], chordName: "", chordQuality: "", repeat: {} } );
             }
 
             function addViewBar( index ) {
@@ -329,14 +329,19 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     newBar = document.createElement( "div" ),
                     bars = hf.getElByCN( "bar" );
 
-
                 // Build DOM Element
                 newBar.classList.add( "bar" );
                 newBar.innerHTML =
                     "<div class=\"barContainer\">" +
                         // "<div class=\"rhythmNumber\">R1</div>" +
                         "<div class=\"barChord\"></div>" +
-                        "<div class=\"barNumber\"></div>" +
+                        "<div class=\"barFooter\">" +
+                            "<div class=\"repeatContainer\">" +
+                                "<div class=\"barPlug\"></div>" +
+                                "<div class=\"barRepeat\"></div>" +
+                            "</div>" +
+                            "<div class=\"number\"></div>" +
+                        " </div>" +
                     "</div>";
                 newBar.setAttribute( "draggable", true );
 
@@ -373,7 +378,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 let barNum = T.getSelectedBarNumber();
 
                 // Clear model
-                T.bars[ barNum ] = { element: T.bars[ barNum ].element, rhythm: [], chordName: "", chordQuality: "" };
+                T.bars[ barNum ] = { element: T.bars[ barNum ].element, rhythm: [], chordName: "", chordQuality: "", repeat: {} };
             }
 
             function clearViewBar() {
@@ -388,14 +393,14 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
          ***************************************************/
             function initDefaultScore() {
                 T.bars = [
-                    { element: {}, rhythm: T.defaultSequence, chordName: "C", chordQuality: "\u25B39" },
-                    { element: {}, rhythm: T.defaultSequence, chordName: "D", chordQuality: "-9" },
-                    { element: {}, rhythm: T.defaultSequence, chordName: "E", chordQuality: "-7b9" },
-                    { element: {}, rhythm: T.defaultSequence, chordName: "F", chordQuality: "\u25B39" },
-                    { element: {}, rhythm: T.defaultSequence, chordName: "G", chordQuality: "9" },
-                    { element: {}, rhythm: T.defaultSequence, chordName: "A", chordQuality: "-9" },
-                    { element: {}, rhythm: T.defaultSequence, chordName: "B", chordQuality: "\u00D8" },
-                    { element: {}, rhythm: T.defaultSequence, chordName: "C", chordQuality: "\u25B3" }
+                    { element: {}, rhythm: T.defaultSequence, chordName: "C", chordQuality: "\u25B39", repeat: {} },
+                    { element: {}, rhythm: T.defaultSequence, chordName: "D", chordQuality: "-9", repeat: {} },
+                    { element: {}, rhythm: T.defaultSequence, chordName: "E", chordQuality: "-7b9", repeat: {} },
+                    { element: {}, rhythm: T.defaultSequence, chordName: "F", chordQuality: "\u25B39", repeat: {} },
+                    { element: {}, rhythm: T.defaultSequence, chordName: "G", chordQuality: "9", repeat: {} },
+                    { element: {}, rhythm: T.defaultSequence, chordName: "A", chordQuality: "-9", repeat: {} },
+                    { element: {}, rhythm: T.defaultSequence, chordName: "B", chordQuality: "\u00D8", repeat: {} },
+                    { element: {}, rhythm: T.defaultSequence, chordName: "C", chordQuality: "\u25B3", repeat: {} }
                 ]
             }
 
@@ -414,6 +419,153 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     setViewQuality( chart[ i ].chordQuality );
                 }
             }
+
+        /***************************************************
+         *                Repeat Plugs
+         ***************************************************/
+            function clearPlugs( firstBar, secondBar )
+            {
+                // Reset connected plug
+                secondBar.plug.style.background = "#323232";
+                secondBar.repeat.innerHTML = "";
+                secondBar.model.repeat = {};
+
+                // Reset clicked plug
+                firstBar.plug.style.background = "#323232";
+                firstBar.repeat.innerHTML = "";
+                firstBar.model.repeat = {};
+            }
+
+            function isNumber( n ) {
+                return !isNaN( parseFloat( n ) ) && isFinite( n );
+            }
+
+            function getRGB()
+            {
+                return { r: hf.getRandomInt( 256 ), g: hf.getRandomInt( 256 ), b: hf.getRandomInt( 256 ) };
+            }
+
+            let randomRGB = getRGB();
+            function setPlug( currentBar, currentPlugSelection, e )
+            {
+                let htmlBars = currentBar.parentNode.children,
+                    viewBars = Array.from( htmlBars ),
+                    i = viewBars.indexOf( currentBar ),
+                    modelBar = T.bars[ i ],
+                    viewPlug = currentBar.getElementsByClassName( "barPlug" )[ 0 ],
+                    viewRepeat = currentBar.getElementsByClassName( "barRepeat" )[ 0 ];
+
+                // Current Bar has a repeat, delete the repeat
+                if ( Object.keys( modelBar.repeat ).length !== 0 )
+                {
+                    let modelOtherBar = T.bars[ modelBar.repeat.to ],
+                        viewOtherBar = htmlBars[ modelBar.repeat.to ],
+                        viewOtherPlug = viewOtherBar.getElementsByClassName( "barPlug" )[ 0 ],
+                        viewOtherRepeat = viewOtherBar.getElementsByClassName( "barRepeat" )[ 0 ];
+
+                    clearPlugs(
+                        {
+                            bar: currentBar,
+                            model: modelBar,
+                            plug: viewPlug,
+                            repeat: viewRepeat
+                        },
+                        {
+                            bar: viewOtherBar,
+                            model: modelOtherBar,
+                            plug: viewOtherPlug,
+                            repeat: viewOtherRepeat
+                        }
+                    );
+                    return;
+                }
+
+                // First Plug clicked
+                if ( ! firstPlugSelection )
+                {
+                    // Always use bright colors
+                    let colorFloor = 100;
+                    while ( randomRGB.r < colorFloor && randomRGB.g < colorFloor && randomRGB.b < colorFloor )
+                        randomRGB = getRGB();
+
+                    currentPlugSelection.style.background = "rgb( " +
+                        randomRGB.r + ", " +
+                        randomRGB.g + ", " +
+                        randomRGB.b + ")";
+
+                    firstPlugSelection = {
+                        plug: currentPlugSelection,
+                        bar: currentBar,
+                        index: i
+                    };
+                }
+                // Second plug clicked
+                else
+                {
+                    let isNum = false,
+                        num = false;
+
+                    // Get user input
+                    while ( ! isNum )
+                    {
+                        num = prompt( "Number of times this passage should play: " );
+
+                        if ( isNumber( num ) && num > 0 )
+                            isNum = true;
+                        else
+                            continue;
+
+                        num = parseInt( num ) - 1;
+                    }
+
+                    let barModel = T.bars[ i ];
+                    
+                    // Connect plugs in correct order
+                    if ( i < firstPlugSelection.index )
+                    {
+                        // Set first repeat plug
+                        barModel.repeat = {
+                            to: firstPlugSelection.index,
+                        };
+
+                        // Set second repeat plug
+                        T.bars[ firstPlugSelection.index ].repeat = {
+                            to: i,
+                            num: num,
+                            remaining: num
+                        };
+
+                        firstPlugSelection.bar
+                            .getElementsByClassName( "barRepeat" )[ 0 ]
+                            .innerHTML = num;
+                    }
+                    else
+                    {
+                        // Set first repeat plug
+                        T.bars[ firstPlugSelection.index ].repeat = {
+                            to: i,
+                        };
+
+                        // Set second repeat plug
+                        barModel.repeat = {
+                            to: firstPlugSelection.index,
+                            num: num,
+                            remaining: num
+                        };
+
+                        viewRepeat.innerHTML = num;
+                    }
+
+                    currentPlugSelection.style.background = "rgb( " +
+                        randomRGB.r + ", " +
+                        randomRGB.g + ", " +
+                        randomRGB.b + ")";
+
+                    randomRGB = getRGB();
+                    firstPlugSelection = false;
+                }
+            }
+
 
         /***************************************************
          *                   Events
@@ -436,13 +588,21 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 keysDown[ e.key ] = false;
             }
 
+            let firstPlugSelection = false;
+
             function mousedown( e ) {
                 if ( e.which === 1 )
                 {
                     if ( hf.isInsideCN( e.target, "bar" ) )
                     {
                         let bar = hf.returnTarget( e.target, "bar" ),
-                            barNum = bar.getElementsByClassName( "barNumber" )[0];
+                            barNum = bar.getElementsByClassName( "number" )[0];
+
+                        if ( e.target.classList.contains( "barPlug" ) )
+                        {
+                            setPlug( bar, e.target, e );
+                            return;
+                        }
 
                         if ( !isEditingBar )
                             setBarSelection( bar );
@@ -614,7 +774,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             if ( !selectedBar )
                 return 0;
 
-            let barNumElement = selectedBar.getElementsByClassName( "barNumber" )[ 0 ],
+            let barNumElement = selectedBar.getElementsByClassName( "number" )[ 0 ],
                 barNum = parseInt( barNumElement.innerHTML );
 
             return barNum - 1;
@@ -637,14 +797,47 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             T.getBarInfo();
 
             let bars = hf.getElByCN( "bar" );
-            barNumber++;
+
+            if ( 'remaining' in currentBar.repeat &&
+                  currentBar.repeat.remaining > 0 )
+            {
+                currentBar.repeat.remaining--;
+                barNumber = currentBar.repeat.to;
+                currentBar
+                    .element
+                    .getElementsByClassName( "barRepeat" )[ 0 ]
+                    .innerHTML = currentBar.repeat.remaining;
+            }
+            else
+                barNumber++;
+
             if ( barNumber >= bars.length )
+            {
                 barNumber = 0;
+                T.resetRepeats();
+            }
         },
 
         resetDraw: function() {
             drawIndex = 0;
             drawTimes = [];
+        },
+
+        resetRepeats: function()
+        {
+            let viewBars = hf.getElByCN( "bar" );
+            for ( let i = 0; i < viewBars.length; i++ )
+            {
+                let bar = viewBars[ i ];
+                let repeat = bar.getElementsByClassName( "barRepeat" )[ 0 ];
+
+                if ( Object.keys( T.bars[ i ].repeat ).length !== 0 &&
+                     T.bars[ i ].repeat.num )
+                {
+                    repeat.innerHTML = T.bars[ i ].repeat.num;
+                    T.bars[ i ].repeat.remaining = T.bars[ i ].repeat.num;
+                }
+            }
         },
 
         getDrawTimes: function() {

@@ -79,6 +79,9 @@ define([ "GlobalState" ], function( gs ) {
                 document.body.removeChild( T.get( "toast" ) );
             }, 3000);
         },
+        getRandomInt: function( max ) {
+          return Math.floor(Math.random() * Math.floor(max));
+        },
         log: function(message) {
             if ( gs.debug )
             {

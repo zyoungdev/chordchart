@@ -7,12 +7,12 @@
             <div class="note" id="Eb">Eb</div>
             <div class="note" id="Ab">Ab</div>
             <div class="note" id="Db">Db</div>
-            <div class="note" id="Gb">Gb</div>
-            <div class="note">B</div>
-            <div class="note">E</div>
-            <div class="note">A</div>
-            <div class="note">D</div>
             <div class="note">G</div>
+            <div class="note">D</div>
+            <div class="note">A</div>
+            <div class="note">E</div>
+            <div class="note">B</div>
+            <div class="note" id="Gb">Gb</div>
         </div>
         <div id="noteQualities" class="noteQualities hide">
             <!--
