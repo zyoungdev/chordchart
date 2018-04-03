@@ -48,6 +48,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 chart.addEventListener( "mouseup", mouseup );
                 window.addEventListener( "keydown", keydown );
                 window.addEventListener( "keyup", keyup );
+                document.body.addEventListener( "scroll", scroll );
 
                 Array.prototype.forEach.call( T.bars, function( bar ) {
                     setBarListeners( bar.element );
@@ -58,6 +59,24 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 bar.addEventListener( "dragstart", dragstart, false );
                 bar.addEventListener( "dragend", dragend, false );
                 bar.addEventListener( "dragover", dragover, false );
+            }
+
+            let lastScroll = 0;
+            function scroll( e ) {
+                let pos = document.body.pageYOffset || document.body.scrollTop;
+
+                if ( pos > lastScroll )
+                {
+                    hf.get( "chordContainer" ).style.display = "none";
+                    hf.get( "chartControls" ).style.display = "none";
+                }
+                else
+                {
+                    hf.get( "chordContainer" ).style.display = "table";
+                    hf.get( "chartControls" ).style.display = "flex";
+                }
+
+                lastScroll = pos;
             }
 
         /***************************************************
