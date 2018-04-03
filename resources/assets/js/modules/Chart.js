@@ -30,7 +30,8 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 "b": function( e ) { if ( e.ctrlKey ) {
                     let barNum = T.getSelectedBarNumber() + 1;
                     T.addModelBar( barNum );
-                    T.addViewBar( barNum ); } },
+                    T.addViewBar( barNum );
+                    resetBarNumbers(); } },
                 "Delete": function( e ) { deleteSelectedBar(); },
             },
             selectedBar = false,
@@ -65,21 +66,17 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
          *               Helper Functions
          ***************************************************/
             function resetBarBorders() {
-                let bars = hf.getElByCN( "bar" );
-
-                for ( let i = 0; i < bars.length; i++ )
+                for ( let i = 0; i < T.bars.length; i++ )
                 {
-                    bars[ i ].classList.remove( "dropSelectedLeft" );
-                    bars[ i ].classList.remove( "dropSelectedRight" );
+                    T.bars[ i ].element.classList.remove( "dropSelectedLeft" );
+                    T.bars[ i ].element.classList.remove( "dropSelectedRight" );
                 }
             }
 
             function resetBarNumbers() {
-                let bars = hf.getElByCN( "bar" );
-
-                for ( let i = 0; i < bars.length; i++ )
+                for ( let i = 0; i < T.bars.length; i++ )
                 {
-                    let barNum = bars[ i ].getElementsByClassName( "number" )[0];
+                    let barNum = T.bars[ i ].element.querySelector( ".number" );
                     barNum.innerHTML = i + 1;
                 }
             }
@@ -102,11 +99,21 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 // Make it selected
                 bar.classList.add( "barSelected" );
 
+                // Change bar number when it's not running
                 if ( !gs.isRunning )
                 {
-                    let barNumElement = bar.getElementsByClassName( "number" )[ 0 ];
+                    let barNumElement = bar.querySelector( ".number" );
                     barNumber = parseInt( barNumElement.innerHTML ) - 1;
                 }
+            }
+
+            function isNumber( n ) {
+                return !isNaN( parseFloat( n ) ) && isFinite( n );
+            }
+
+            function getRGB()
+            {
+                return { r: hf.getRandomInt( 256 ), g: hf.getRandomInt( 256 ), b: hf.getRandomInt( 256 ) };
             }
 
         /***************************************************
@@ -119,8 +126,6 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             function dragover( e ) {
-                let bars = hf.getElByCN( "bar" );
-
                 elementOver = hf.returnTarget( e.target, "bar" );
                 altIsDown = e.altKey;
 
@@ -153,13 +158,8 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 resetBarBorders();
 
                 // Done dragging, remove dragging CSS
-                for ( let i = 0; i < bars.length; i++ )
-                {
-
-                    bars[ i ].classList.remove( "dragging" );
-
-                    // draggedBarElement.classList.remove( "dragging" );
-                }
+                for ( let i = 0; i < T.bars.length; i++ )
+                    T.bars[ i ].element.classList.remove( "dragging" );
 
                 // Don't do anything if dropped on same element
                 if ( draggedBarElement === overBarElement )
@@ -278,7 +278,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             function setViewChord( chordName ) {
-                let chordContainer = selectedBar.getElementsByClassName( "barChord" )[0],
+                let chordContainer = selectedBar.querySelector( ".barChord" ),
                     barNum = T.getSelectedBarNumber();
 
                 // Set chord name in view
@@ -293,13 +293,10 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             function setViewQuality( chordQuality ) {
-                let chordContainer = selectedBar.getElementsByClassName( "barChord" )[0],
+                let chordContainer = selectedBar.querySelector( ".barChord" ),
                     bars = hf.getElByCN( "bar" ),
                     barNum = T.getSelectedBarNumber(),
                     index = Array.prototype.indexOf.call( bars, selectedBar );
-
-                // Set chord quality in model
-                // T.bars[ barNum ].chordQuality = chordQuality;
 
                 // Set chord quality in view
                 chordContainer.innerHTML += chordQuality;
@@ -326,8 +323,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
 
             function addViewBar( index ) {
                 let workspace = hf.get( "chartWorkspace" ),
-                    newBar = document.createElement( "div" ),
-                    bars = hf.getElByCN( "bar" );
+                    newBar = document.createElement( "div" );
 
                 // Build DOM Element
                 newBar.classList.add( "bar" );
@@ -350,7 +346,6 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 setBarSelection( newBar );
 
                 setBarListeners( newBar );
-                resetBarNumbers();
 
                 return workspace.children[ index ];
             }
@@ -382,7 +377,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             function clearViewBar() {
-                let chordContainer = selectedBar.getElementsByClassName( "barChord" )[0];
+                let chordContainer = selectedBar.querySelector( ".barChord" );
 
                 // Clear view
                 chordContainer.innerHTML = "";
@@ -419,6 +414,8 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     setViewQuality( chart[ i ].chordQuality );
                     setRepeat( chart, i );
                 }
+
+                resetBarNumbers();
             }
 
         /***************************************************
@@ -437,15 +434,6 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 firstBar.model.repeat = {};
             }
 
-            function isNumber( n ) {
-                return !isNaN( parseFloat( n ) ) && isFinite( n );
-            }
-
-            function getRGB()
-            {
-                return { r: hf.getRandomInt( 256 ), g: hf.getRandomInt( 256 ), b: hf.getRandomInt( 256 ) };
-            }
-
             let randomRGB = getRGB();
             function setPlug( currentBar, currentPlugSelection, e )
             {
@@ -453,16 +441,16 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     viewBars = Array.from( htmlBars ),
                     i = viewBars.indexOf( currentBar ),
                     modelBar = T.bars[ i ],
-                    viewPlug = currentBar.getElementsByClassName( "barPlug" )[ 0 ],
-                    viewRepeat = currentBar.getElementsByClassName( "barRepeat" )[ 0 ];
+                    viewPlug = currentBar.querySelector( ".barPlug" ),
+                    viewRepeat = currentBar.querySelector( ".barRepeat" );
 
                 // Current Bar has a repeat, delete the repeat
                 if ( Object.keys( modelBar.repeat ).length !== 0 )
                 {
                     let modelOtherBar = T.bars[ modelBar.repeat.to ],
                         viewOtherBar = htmlBars[ modelBar.repeat.to ],
-                        viewOtherPlug = viewOtherBar.getElementsByClassName( "barPlug" )[ 0 ],
-                        viewOtherRepeat = viewOtherBar.getElementsByClassName( "barRepeat" )[ 0 ];
+                        viewOtherPlug = viewOtherBar.querySelector( ".barPlug" ),
+                        viewOtherRepeat = viewOtherBar.querySelector( ".barRepeat" );
 
                     clearPlugs(
                         {
@@ -537,7 +525,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                         };
 
                         firstPlugSelection.bar
-                            .getElementsByClassName( "barRepeat" )[ 0 ]
+                            .querySelector( ".barRepeat" )
                             .innerHTML = num;
                     }
                     else
@@ -572,10 +560,10 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 let bar = chart[ index ];
                 if ( 'num' in bar.repeat )
                 {
-                    let repeat = bar.element.getElementsByClassName( "barRepeat" )[ 0 ],
-                        plug = bar.element.getElementsByClassName( "barPlug" )[ 0 ],
+                    let repeat = bar.element.querySelector( ".barRepeat" ),
+                        plug = bar.element.querySelector( ".barPlug" ),
                         otherBar = chart[ bar.repeat.to ],
-                        otherPlug = otherBar.element.getElementsByClassName( "barPlug" )[ 0 ];
+                        otherPlug = otherBar.element.querySelector( ".barPlug" );
 
                     randomRGB = getRGB();
                     plug.style.background = "rgb( " +
@@ -620,7 +608,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     if ( hf.isInsideCN( e.target, "bar" ) )
                     {
                         let bar = hf.returnTarget( e.target, "bar" ),
-                            barNum = bar.getElementsByClassName( "number" )[0];
+                            barNum = bar.querySelector( ".number" );
 
                         if ( e.target.classList.contains( "barPlug" ) )
                         {
@@ -702,57 +690,6 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                         workspace.innerHTML = "";
                         selectedBar = false;
                     }
-                    else if ( e.target.classList.contains( "pianoNavButton" ) )
-                    {
-                        let button = e.target,
-                            buttonText = e.target.innerHTML;
-
-                        if ( buttonText === "Piano Notes" )
-                        {
-                            let chords = hf.get( "chordContainer" );
-
-                            if ( chords.classList.contains( "hide" ) )
-                            {
-                                chords.classList.remove( "hide" );
-                                button.classList.add( "activeButton" );
-                            }
-                            else
-                            {
-                                chords.classList.add( "hide" );
-                                button.classList.remove( "activeButton" );
-                            }
-                        }
-                        else if ( buttonText === "Chord Chart Controls" )
-                        {
-                            let chartcontrols = hf.get( "chartControls" );
-
-                            if ( chartcontrols.classList.contains( "hide" ) )
-                            {
-                                chartcontrols.classList.remove( "hide" );
-                                button.classList.add( "activeButton" );
-                            }
-                            else
-                            {
-                                chartcontrols.classList.add( "hide" );
-                                button.classList.remove( "activeButton" );
-                            }
-                        }
-                        else if ( buttonText === "Chord Chart" )
-                        {
-                            let chordchart = hf.get( "chartWorkspace" );
-
-                            if ( chordchart.classList.contains( "hide" ) )
-                            {
-                                chordchart.classList.remove( "hide" );
-                                button.classList.add( "activeButton" );
-                            }
-                            else
-                            {
-                                chordchart.classList.add( "hide" );
-                                button.classList.remove( "activeButton" );
-                            }
-                        }
-                    }
                 }
             }
 
@@ -763,6 +700,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
         addBar: function( index ) {
             let barElement = addViewBar( index );
             addModelBar( index, barElement );
+            resetBarNumbers();
         },
 
         removeBar: function( index ) {
@@ -798,7 +736,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             if ( !selectedBar )
                 return 0;
 
-            let barNumElement = selectedBar.getElementsByClassName( "number" )[ 0 ],
+            let barNumElement = selectedBar.querySelector( ".number" ),
                 barNum = parseInt( barNumElement.innerHTML );
 
             return barNum - 1;
@@ -813,14 +751,11 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
         },
 
         getBar: function() {
-            let bars = hf.getElByCN( "bar" );
-            return bars[ barNumber ];
+            return T.bars[ barNumber ].element;
         },
 
         barTick: function() {
             T.getBarInfo();
-
-            let bars = hf.getElByCN( "bar" );
 
             if ( 'remaining' in currentBar.repeat &&
                   currentBar.repeat.remaining > 0 )
@@ -829,13 +764,13 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 barNumber = currentBar.repeat.to;
                 currentBar
                     .element
-                    .getElementsByClassName( "barRepeat" )[ 0 ]
+                    .querySelector( ".barRepeat" )
                     .innerHTML = currentBar.repeat.remaining;
             }
             else
                 barNumber++;
 
-            if ( barNumber >= bars.length )
+            if ( barNumber >= T.bars.length )
             {
                 barNumber = 0;
                 T.resetRepeats();
@@ -849,17 +784,16 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
 
         resetRepeats: function()
         {
-            let viewBars = hf.getElByCN( "bar" );
-            for ( let i = 0; i < viewBars.length; i++ )
+            for ( let i = 0; i < T.bars.length; i++ )
             {
-                let bar = viewBars[ i ];
-                let repeat = bar.getElementsByClassName( "barRepeat" )[ 0 ];
+                let bar = T.bars[ i ];
+                let repeat = bar.element.querySelector( ".barRepeat" );
 
-                if ( Object.keys( T.bars[ i ].repeat ).length !== 0 &&
-                     T.bars[ i ].repeat.num )
+                if ( Object.keys( bar.repeat ).length !== 0 &&
+                     bar.repeat.num )
                 {
-                    repeat.innerHTML = T.bars[ i ].repeat.num;
-                    T.bars[ i ].repeat.remaining = T.bars[ i ].repeat.num;
+                    repeat.innerHTML = bar.repeat.num;
+                    bar.repeat.remaining = bar.repeat.num;
                 }
             }
         },
@@ -877,10 +811,8 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 // Light up bar
                 if (drawIndex === 0)
                 {
-                    let bars = hf.getElByCN( "bar" );
-
-                    Array.prototype.forEach.call(bars, function( el ) {
-                        el.classList.remove( "barPlaying" );
+                    Array.prototype.forEach.call( T.bars, function( bar ) {
+                        bar.element.classList.remove( "barPlaying" );
                     });
 
                     currentBar.element.classList.add( "barPlaying" );
