@@ -412,11 +412,12 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     let barElement = addViewBar( i );
 
                     // Set DOM Element in model
-                    T.bars[ i ].element = barElement;
+                    chart[ i ].element = barElement;
 
                     // Set chord and quality in view
                     setViewChord( chart[ i ].chordName );
                     setViewQuality( chart[ i ].chordQuality );
+                    setRepeat( chart, i );
                 }
             }
 
@@ -566,6 +567,29 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 }
             }
 
+            function setRepeat( chart, index )
+            {
+                let bar = chart[ index ];
+                if ( 'num' in bar.repeat )
+                {
+                    let repeat = bar.element.getElementsByClassName( "barRepeat" )[ 0 ],
+                        plug = bar.element.getElementsByClassName( "barPlug" )[ 0 ],
+                        otherBar = chart[ bar.repeat.to ],
+                        otherPlug = otherBar.element.getElementsByClassName( "barPlug" )[ 0 ];
+
+                    randomRGB = getRGB();
+                    plug.style.background = "rgb( " +
+                        randomRGB.r + ", " +
+                        randomRGB.g + ", " +
+                        randomRGB.b + ")";
+
+                    otherPlug.style.background = "rgb( " +
+                        randomRGB.r + ", " +
+                        randomRGB.g + ", " +
+                        randomRGB.b + ")";
+                    repeat.innerHTML = bar.repeat.num;
+                }
+            }
 
         /***************************************************
          *                   Events
