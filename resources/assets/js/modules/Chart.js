@@ -598,7 +598,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             function setRepeat( chart, index )
             {
                 let bar = chart[ index ];
-                if ( 'num' in bar.repeat )
+                if ( 'repeat' in bar )
                 {
                     let repeat = bar.element.querySelector( ".barRepeat" ),
                         plug = bar.element.querySelector( ".barPlug" ),
@@ -797,7 +797,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
         barTick: function() {
             T.getBarInfo();
 
-            if ( 'remaining' in currentBar.repeat &&
+            if ( Object.keys( bar.repeat ).length !== 0 && 'remaining' in currentBar.repeat &&
                   currentBar.repeat.remaining > 0 )
             {
                 currentBar.repeat.remaining--;
