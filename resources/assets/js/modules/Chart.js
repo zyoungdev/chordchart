@@ -598,12 +598,13 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             function setRepeat( chart, index )
             {
                 let bar = chart[ index ];
-                if ( 'repeat' in bar )
+                if ( 'repeat' in bar && Object.keys( bar.repeat ).length !== 0 )
                 {
                     let repeat = bar.element.querySelector( ".barRepeat" ),
                         plug = bar.element.querySelector( ".barPlug" ),
                         otherBar = chart[ bar.repeat.to ],
                         otherPlug = otherBar.element.querySelector( ".barPlug" );
+
 
                     randomRGB = getRGB();
                     plug.style.background = "rgb( " +
