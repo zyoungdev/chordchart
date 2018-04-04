@@ -840,8 +840,9 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 let bar = T.bars[ i ];
                 let repeat = bar.element.querySelector( ".barRepeat" );
 
-                if ( Object.keys( bar.repeat ).length !== 0 &&
-                     bar.repeat.num )
+                if ( 'repeat' in bar &&
+                     Object.keys( bar.repeat ).length !== 0 &&
+                     'num' in bar.repeat )
                 {
                     repeat.innerHTML = bar.repeat.num;
                     bar.repeat.remaining = bar.repeat.num;
