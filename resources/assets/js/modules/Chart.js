@@ -601,28 +601,31 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             {
                 let bar = chart[ index ];
 
-                // Only setup repeat on rightmost plug
-                if ( bar.repeat.to > index )
-                    return;
-
-                if ( 'repeat' in bar && Object.keys( bar.repeat ).length !== 0 )
+                if ( 'repeat' in bar )
                 {
-                    let repeat = bar.element.querySelector( ".barRepeat" ),
-                        plug = bar.element.querySelector( ".barPlug" ),
-                        otherBar = chart[ bar.repeat.to ],
-                        otherPlug = otherBar.element.querySelector( ".barPlug" );
+                    // Only setup repeat on rightmost plug
+                    if ( bar.repeat.to > index )
+                        return;
 
-                    randomRGB = getRGB();
-                    plug.style.background = "rgb( " +
-                        randomRGB.r + ", " +
-                        randomRGB.g + ", " +
-                        randomRGB.b + ")";
+                    if ( Object.keys( bar.repeat ).length !== 0 )
+                    {
+                        let repeat = bar.element.querySelector( ".barRepeat" ),
+                            plug = bar.element.querySelector( ".barPlug" ),
+                            otherBar = chart[ bar.repeat.to ],
+                            otherPlug = otherBar.element.querySelector( ".barPlug" );
 
-                    otherPlug.style.background = "rgb( " +
-                        randomRGB.r + ", " +
-                        randomRGB.g + ", " +
-                        randomRGB.b + ")";
-                    repeat.innerHTML = bar.repeat.num;
+                        randomRGB = getRGB();
+                        plug.style.background = "rgb( " +
+                            randomRGB.r + ", " +
+                            randomRGB.g + ", " +
+                            randomRGB.b + ")";
+
+                        otherPlug.style.background = "rgb( " +
+                            randomRGB.r + ", " +
+                            randomRGB.g + ", " +
+                            randomRGB.b + ")";
+                        repeat.innerHTML = bar.repeat.num;
+                    }
                 }
             }
 
