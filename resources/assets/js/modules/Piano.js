@@ -100,8 +100,10 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
                 "u": 10,
                 "j": 11,
                 "k": 12,
-                "l": 0,
-                ":": 1
+                "o": 13,
+                "l": 14,
+                "p": 15,
+                ";": 16
             },
 
             keyDownMap = {
@@ -120,7 +122,11 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
                 "h": function( e ) { scheduleKeyboardNote( e ); },
                 "u": function( e ) { scheduleKeyboardNote( e ); },
                 "j": function( e ) { scheduleKeyboardNote( e ); },
-                "k": function( e ) { scheduleKeyboardNote( e ); }
+                "k": function( e ) { scheduleKeyboardNote( e ); },
+                "o": function( e ) { scheduleKeyboardNote( e ); },
+                "l": function( e ) { scheduleKeyboardNote( e ); },
+                "p": function( e ) { scheduleKeyboardNote( e ); },
+                ";": function( e ) { scheduleKeyboardNote( e ); }
             };
 
         function setListeners() {
