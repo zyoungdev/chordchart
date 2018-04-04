@@ -512,6 +512,8 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 // First Plug clicked
                 if ( ! firstPlugSelection )
                 {
+                    randomRGB = getRGB();
+
                     // Always use bright colors
                     let colorFloor = 100;
                     while ( randomRGB.r < colorFloor && randomRGB.g < colorFloor && randomRGB.b < colorFloor )
@@ -598,13 +600,17 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             function setRepeat( chart, index )
             {
                 let bar = chart[ index ];
+
+                // Only setup repeat on rightmost plug
+                if ( bar.repeat.to > index )
+                    return;
+
                 if ( 'repeat' in bar && Object.keys( bar.repeat ).length !== 0 )
                 {
                     let repeat = bar.element.querySelector( ".barRepeat" ),
                         plug = bar.element.querySelector( ".barPlug" ),
                         otherBar = chart[ bar.repeat.to ],
                         otherPlug = otherBar.element.querySelector( ".barPlug" );
-
 
                     randomRGB = getRGB();
                     plug.style.background = "rgb( " +
@@ -798,8 +804,9 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
         barTick: function() {
             T.getBarInfo();
 
-            if ( Object.keys( bar.repeat ).length !== 0 && 'remaining' in currentBar.repeat &&
-                  currentBar.repeat.remaining > 0 )
+            if ( 'repeat' in currentBar &&
+                 Object.keys( currentBar.repeat ).length !== 0 &&
+                 currentBar.repeat.remaining > 0 )
             {
                 currentBar.repeat.remaining--;
                 barNumber = currentBar.repeat.to;

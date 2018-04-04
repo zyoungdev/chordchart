@@ -323,7 +323,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
                     hf.toast( "Chart link copied to clipboard" );
                 }
-                else if ( e.target.id === "chartWorkspace" )
+                else if ( e.target.id === "chart" )
                 {
                     if ( gs.isRunning )
                         T.stop();
