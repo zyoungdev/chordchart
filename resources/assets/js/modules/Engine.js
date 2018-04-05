@@ -189,6 +189,14 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 instruments: Instruments
             };
 
+            for ( let i = 0; i < Chart.bars.length; i++ )
+            {
+                let bar = Chart.bars[ i ];
+
+                delete bar.element;
+                delete bar.repeat.toBar;
+            }
+
             let form = e.target,
                 hash = createHash( 8 );
 
