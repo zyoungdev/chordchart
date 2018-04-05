@@ -242,6 +242,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 T.bars.splice( droppedBarIndex, 0, barModel );
 
                 resetBarNumbers();
+                normalizeRepeats();
 
                 // Reset selection then select correct bar
                 setBarSelection( bars[ 0 ] );
@@ -269,6 +270,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             function cutBar( e ) {
                 copyBar( e )
                 deleteSelectedBar();
+                normalizeRepeats();
             }
 
             function pasteBar( e ) {
@@ -291,6 +293,7 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     newBar, selectedBar.nextSibling );
 
                 resetBarNumbers();
+                normalizeRepeats();
             }
 
             function deleteSelectedBar() {
@@ -554,14 +557,18 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     // Connect plugs in correct order
                     if ( i < firstPlugSelection.index )
                     {
+                        // End selected first
+
                         // Set first repeat plug
                         barModel.repeat = {
                             to: firstPlugSelection.index,
+                            toBar: firstPlugSelection.bar
                         };
 
                         // Set second repeat plug
                         T.bars[ firstPlugSelection.index ].repeat = {
                             to: i,
+                            toBar: currentBar,
                             num: num,
                             remaining: num
                         };
@@ -572,19 +579,24 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     }
                     else
                     {
+                        // End selected second
+
                         // Set first repeat plug
                         T.bars[ firstPlugSelection.index ].repeat = {
                             to: i,
+                            toBar: currentBar
                         };
 
                         // Set second repeat plug
                         barModel.repeat = {
                             to: firstPlugSelection.index,
+                            toBar: firstPlugSelection.bar,
                             num: num,
                             remaining: num
                         };
 
                         viewRepeat.innerHTML = num;
+                        console.log( T.bars );
                     }
 
                     currentPlugSelection.style.background = "rgb( " +
@@ -592,9 +604,29 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                         randomRGB.g + ", " +
                         randomRGB.b + ")";
 
-                    randomRGB = getRGB();
                     firstPlugSelection = false;
                 }
+            }
+
+            function normalizeRepeats()
+            {
+                for ( let i = 0; i < T.bars.length; i++ )
+                {
+                    let bar = T.bars[ i ];
+
+                    if ( 'repeat' in bar )
+                    {
+                        // Only setup repeat on rightmost plug
+                        if ( bar.repeat.to > i || Object.keys( bar.repeat ).length === 0 )
+                            continue;
+
+                        let otherBarIndex = Array.from( hf.getElByCN( "bar" ) ).indexOf( bar.repeat.toBar );
+
+                        bar.repeat.to = otherBarIndex;
+                        T.bars[ otherBarIndex ].repeat.to = i;
+                    }
+                }
+                console.log( T.bars );
             }
 
             function setRepeat( chart, index )
@@ -613,6 +645,10 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                             plug = bar.element.querySelector( ".barPlug" ),
                             otherBar = chart[ bar.repeat.to ],
                             otherPlug = otherBar.element.querySelector( ".barPlug" );
+
+                        // Set pointers to view
+                        bar.repeat.toBar = otherBar.element;
+                        otherBar.repeat.toBar = bar.element;
 
                         randomRGB = getRGB();
                         plug.style.background = "rgb( " +
@@ -751,11 +787,13 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             let barElement = addViewBar( index );
             addModelBar( index, barElement );
             resetBarNumbers();
+            normalizeRepeats();
         },
 
         removeBar: function( index ) {
             removeModelBar( index );
             removeViewBar( index );
+            normalizeRepeats();
         },
 
         clearBar: function( index ) {
