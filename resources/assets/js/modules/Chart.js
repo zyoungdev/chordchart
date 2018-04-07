@@ -596,7 +596,6 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                         };
 
                         viewRepeat.innerHTML = num;
-                        console.log( T.bars );
                     }
 
                     currentPlugSelection.style.background = "rgb( " +
@@ -626,7 +625,6 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                         T.bars[ otherBarIndex ].repeat.to = i;
                     }
                 }
-                console.log( T.bars );
             }
 
             function setRepeat( chart, index )
