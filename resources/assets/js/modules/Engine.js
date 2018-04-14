@@ -193,8 +193,10 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
             {
                 let bar = Chart.bars[ i ];
 
-                delete bar.element;
-                delete bar.repeat.toBar;
+                if ( bar.element )
+                    delete bar.element;
+                if ( bar.repeat )
+                    delete bar.repeat.toBar;
             }
 
             let form = e.target,
