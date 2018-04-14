@@ -82,6 +82,9 @@ define([ "GlobalState" ], function( gs ) {
         getRandomInt: function( max ) {
           return Math.floor(Math.random() * Math.floor(max));
         },
+        getBox: function( el ) {
+            return el.getBoundingClientRect();
+        },
         log: function(message) {
             if ( gs.debug )
             {
