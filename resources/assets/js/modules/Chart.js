@@ -1,4 +1,4 @@
-define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
+define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
     "use strict";
 
     let T = {},
@@ -902,6 +902,9 @@ define([  "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     Array.prototype.forEach.call( T.bars, function( bar ) {
                         bar.element.classList.remove( "barPlaying" );
                     });
+
+                    if ( gs.fullscreen )
+                        document.body.scrollTop = currentBar.element.offsetTop;
 
                     currentBar.element.classList.add( "barPlaying" );
                 }

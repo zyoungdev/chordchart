@@ -10,6 +10,7 @@ define(function() {
         this.isRunning = false;
         this.MaxLookAhead = 0.05;
         this.lookAhead = 0.02;
+        this.fullscreen = false;
     }
 
     GlobalState.prototype = {

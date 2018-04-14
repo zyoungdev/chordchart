@@ -228,15 +228,14 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 requestAnimFrame( reqFrame );
         }
 
-        let fullscreen = true,
-            viewingChart = true;
+        let viewingChart = true;
 
         function showHideNotes()
         {
             let notes = hf.get( "chordContainer" ),
                 controls = hf.get( "chartControls" );
 
-            if ( fullscreen )
+            if ( ! gs.fullscreen )
             {
                 notes.classList.add( "hide" );
                 controls.classList.add( "hide" );
@@ -247,7 +246,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 controls.classList.remove( "hide" );
             }
 
-            fullscreen = ! fullscreen;
+            gs.fullscreen = ! gs.fullscreen;
         }
 
         function mousedown( e ) {
