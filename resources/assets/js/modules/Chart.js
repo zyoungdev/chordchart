@@ -42,7 +42,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
          *               Listeners
          ***************************************************/
             function setListeners() {
-                let chart = hf.get( "chart" );
+                let chart = hf.$( "#chart" );
 
                 chart.addEventListener( "mousedown", mousedown );
                 chart.addEventListener( "mouseup", mouseup );
@@ -70,9 +70,9 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 {
                     if ( ! isScrolling )
                     {
-                        let notes = hf.get( "chordContainer" ),
-                            controls = hf.get( "chartControls" ),
-                            bars = hf.get( "chartWorkspace" ),
+                        let notes = hf.$( "#chordContainer" ),
+                            controls = hf.$( "#chartControls" ),
+                            bars = hf.$( "#chartWorkspace" ),
                             controlsRect = controls.getBoundingClientRect(),
                             notesRect = notes.getBoundingClientRect();
 
@@ -86,9 +86,9 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 }
                 else if ( pos === 0 )
                 {
-                    let notes = hf.get( "chordContainer" ),
-                        controls = hf.get( "chartControls" ),
-                        bars = hf.get( "chartWorkspace" ),
+                    let notes = hf.$( "#chordContainer" ),
+                        controls = hf.$( "#chartControls" ),
+                        bars = hf.$( "#chartWorkspace" ),
                         notesRect = notes.getBoundingClientRect();
 
                     notes.classList.remove( "chordContainerScrolling" );
@@ -116,7 +116,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             function resetBarNumbers() {
                 for ( let i = 0; i < T.bars.length; i++ )
                 {
-                    let barNum = T.bars[ i ].element.querySelector( ".number" );
+                    let barNum = hf.$( ".number", T.bars[ i ].element, true );
                     barNum.innerHTML = i + 1;
                 }
             }
@@ -142,7 +142,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 // Change bar number when it's not running
                 if ( !gs.isRunning )
                 {
-                    let barNumElement = bar.querySelector( ".number" );
+                    let barNumElement = hf.$( ".number", bar, true );
                     barNumber = parseInt( barNumElement.innerHTML ) - 1;
                 }
             }
@@ -321,7 +321,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             function setViewChord( chordName ) {
-                let chordContainer = selectedBar.querySelector( ".barChord" ),
+                let chordContainer = hf.$( ".barChord", selectedBar, true ),
                     barNum = T.getSelectedBarNumber();
 
                 // Set chord name in view
@@ -336,7 +336,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             function setViewQuality( chordQuality ) {
-                let chordContainer = selectedBar.querySelector( ".barChord" ),
+                let chordContainer = hf.$( ".barChord", selectedBar, true ),
                     bars = hf.getElByCN( "bar" ),
                     barNum = T.getSelectedBarNumber(),
                     index = Array.prototype.indexOf.call( bars, selectedBar );
@@ -365,7 +365,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             function addViewBar( index ) {
-                let workspace = hf.get( "chartWorkspace" ),
+                let workspace = hf.$( "#chartWorkspace" ),
                     newBar = document.createElement( "div" );
 
                 // Build DOM Element
@@ -399,7 +399,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             function removeViewBar( index ) {
-                let workspace = hf.get( "chartWorkspace" );
+                let workspace = hf.$( "#chartWorkspace" );
 
                 if ( index < 0 )
                     index = 0;
@@ -420,7 +420,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             function clearViewBar() {
-                let chordContainer = selectedBar.querySelector( ".barChord" );
+                let chordContainer = hf.$( ".barChord", selectedBar, true );
 
                 // Clear view
                 chordContainer.innerHTML = "";
@@ -484,16 +484,16 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     viewBars = Array.from( htmlBars ),
                     i = viewBars.indexOf( currentBar ),
                     modelBar = T.bars[ i ],
-                    viewPlug = currentBar.querySelector( ".barPlug" ),
-                    viewRepeat = currentBar.querySelector( ".barRepeat" );
+                    viewPlug = hf.$( ".barPlug", currentBar, true ),
+                    viewRepeat = hf.$( ".barRepeat", currentBar, true );
 
                 // Current Bar has a repeat, delete the repeat
                 if ( Object.keys( modelBar.repeat ).length !== 0 )
                 {
                     let modelOtherBar = T.bars[ modelBar.repeat.to ],
                         viewOtherBar = htmlBars[ modelBar.repeat.to ],
-                        viewOtherPlug = viewOtherBar.querySelector( ".barPlug" ),
-                        viewOtherRepeat = viewOtherBar.querySelector( ".barRepeat" );
+                        viewOtherPlug = hf.$( ".barPlug", viewOtherBar, true ),
+                        viewOtherRepeat = hf.$( ".barRepeat", viewOtherBar, true );
 
                     clearPlugs(
                         {
@@ -573,8 +573,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                             remaining: num
                         };
 
-                        firstPlugSelection.bar
-                            .querySelector( ".barRepeat" )
+                        hf.$( ".barRepeat", firstPlugSelection.bar, true )
                             .innerHTML = num;
                     }
                     else
@@ -639,10 +638,10 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
 
                     if ( Object.keys( bar.repeat ).length !== 0 )
                     {
-                        let repeat = bar.element.querySelector( ".barRepeat" ),
-                            plug = bar.element.querySelector( ".barPlug" ),
+                        let repeat = hf.$( ".barRepeat", bar.element, true ),
+                            plug = hf.$( ".barPlug", bar.element, true ),
                             otherBar = chart[ bar.repeat.to ],
-                            otherPlug = otherBar.element.querySelector( ".barPlug" );
+                            otherPlug = hf.$( ".barPlug", otherBar.element, true );
 
                         // Set pointers to view
                         bar.repeat.toBar = otherBar.element;
@@ -692,7 +691,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     if ( hf.isInsideCN( e.target, "bar" ) )
                     {
                         let bar = hf.returnTarget( e.target, "bar" ),
-                            barNum = bar.querySelector( ".number" );
+                            barNum = hf.$( ".number", bar, true );
 
                         if ( e.target.classList.contains( "barPlug" ) )
                         {
@@ -708,8 +707,8 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                         if ( !selectedBar )
                             return;
 
-                        let notes = hf.get( "notes" ),
-                            qualities = hf.get( "noteQualities" );
+                        let notes = hf.$( "#notes" ),
+                            qualities = hf.$( "#noteQualities" );
 
                         T.setChord( e.target.innerHTML );
                         qualities.classList.remove( "hide" );
@@ -719,8 +718,8 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     }
                     else if ( e.target.classList.contains( "quality" ) )
                     {
-                        let notes = hf.get( "notes" ),
-                            qualities = hf.get( "noteQualities" );
+                        let notes = hf.$( "#notes" ),
+                            qualities = hf.$( "#noteQualities" );
 
                         T.setQuality( e.target.innerHTML );
                         notes.classList.remove( "hide" );
@@ -740,7 +739,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     }
                     else if ( e.target.id === "addBar" )
                     {
-                        let workspace = hf.get( "chartWorkspace" );
+                        let workspace = hf.$( "#chartWorkspace" );
                         if ( workspace.innerHTML === "" )
                         {
                             T.addBar( 0 );
@@ -770,7 +769,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                         // Clear model
                         T.bars = [];
 
-                        let workspace = hf.get( "chartWorkspace" );
+                        let workspace = hf.$( "#chartWorkspace" );
                         workspace.innerHTML = "";
                         selectedBar = false;
                     }
@@ -822,7 +821,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             if ( !selectedBar )
                 return 0;
 
-            let barNumElement = selectedBar.querySelector( ".number" ),
+            let barNumElement = hf.$( ".number", selectedBar, true ),
                 barNum = parseInt( barNumElement.innerHTML );
 
             return barNum - 1;
@@ -849,9 +848,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             {
                 currentBar.repeat.remaining--;
                 barNumber = currentBar.repeat.to;
-                currentBar
-                    .element
-                    .querySelector( ".barRepeat" )
+                hf.$( ".barRepeat", currentBar.element, true )
                     .innerHTML = currentBar.repeat.remaining;
             }
             else
@@ -874,7 +871,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             for ( let i = 0; i < T.bars.length; i++ )
             {
                 let bar = T.bars[ i ];
-                let repeat = bar.element.querySelector( ".barRepeat" );
+                let repeat = hf.$( ".barRepeat", bar.element, true );
 
                 if ( 'repeat' in bar &&
                      Object.keys( bar.repeat ).length !== 0 &&

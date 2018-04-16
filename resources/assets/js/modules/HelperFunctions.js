@@ -9,6 +9,17 @@ define([ "GlobalState" ], function( gs ) {
     }
 
     HelperFunctions.prototype = {
+        $: function( idOrClass, el = document, getFirst = false ) {
+            if ( idOrClass[ 0 ] === "." )
+                if ( getFirst )
+                    return el.getElementsByClassName( idOrClass.substr( 1 ) )[ 0 ];
+                else
+                    return el.getElementsByClassName( idOrClass.substr( 1 ) );
+            if ( idOrClass[ 0 ] === "#" )
+                return el.getElementById( idOrClass.substr( 1 ) );
+
+            return undefined;
+        },
         clamp: function( val, min, max ) {
             return (val < min) ? min : (val > max) ? max : val;
         },
@@ -76,7 +87,7 @@ define([ "GlobalState" ], function( gs ) {
             document.body.appendChild( div );
 
             setTimeout(function() {
-                document.body.removeChild( T.get( "toast" ) );
+                document.body.removeChild( T.$( "#toast" ) );
             }, 3000);
         },
         getRandomInt: function( max ) {

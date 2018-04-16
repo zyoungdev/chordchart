@@ -48,7 +48,7 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
         }
 
         function setListeners() {
-            let metronomeElement = hf.get("metronome");
+            let metronomeElement = hf.$( "#metronome" );
             metronomeElement.addEventListener("mousedown", mousedown);
             metronomeElement.addEventListener("mouseup", mouseup);
         }
@@ -105,7 +105,7 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
 
     Metronome.prototype = {
         addPad: function() {
-            let metronomeSequence = hf.get( "metronomeSequence" ),
+            let metronomeSequence = hf.$( "#metronomeSequence" ),
                 newPad = document.createElement( "div" ),
                 pads = metronomeSequence.getElementsByClassName( "metronomePad" );
 
@@ -128,7 +128,7 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
         },
 
         subPad: function() {
-            let metronomeSequence = hf.get( "metronomeSequence" ),
+            let metronomeSequence = hf.$( "#metronomeSequence" ),
                 pads = metronomeSequence.getElementsByClassName( "metronomePad" );
 
             if ( pads.length > 1 )
@@ -147,7 +147,7 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
         },
 
         setSequence: function() {
-            let metronomeSequence = hf.get("metronomeSequence"),
+            let metronomeSequence = hf.$( "#metronomeSequence" ),
                 pads = metronomeSequence.getElementsByClassName("metronomePad");
 
             for ( let i = 0; i < T.sequence.length; i++ )
@@ -160,7 +160,7 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
         },
 
         getSequence: function() {
-            let metronomeSequence = hf.get("metronomeSequence"),
+            let metronomeSequence = hf.$( "#metronomeSequence" ),
                 pads = metronomeSequence.getElementsByClassName("metronomePad");
 
             T.sequence = [];
@@ -249,10 +249,10 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
             T.volume = state.volume;
             T.waveType = state.waveType;
 
-            let root = hf.get( "metronomeRoot" ),
-                type = hf.get( "metronomeType" ),
-                clickLength = hf.get( "metronomeClickLength" ),
-                volume = hf.get( "metronomeVolume" );
+            let root = hf.$( "#metronomeRoot" ),
+                type = hf.$( "#metronomeType" ),
+                clickLength = hf.$( "#metronomeClickLength" ),
+                volume = hf.$( "#metronomeVolume" );
 
             root.value = T.root;
             type.value = T.waveType;
@@ -262,7 +262,7 @@ define([ "HelperFunctions", "AudioContext", "MasterChannel" ], function( hf, ac,
 
         init: function( state, callback ) {
             hf.log("Metronome init");
-            let metronomeSequence = hf.get("metronomeSequence");
+            let metronomeSequence = hf.$( "#metronomeSequence" );
 
 
             if ( state )

@@ -82,13 +82,13 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 mouseup( e );
             });
 
-            hf.get( "tempo" ).addEventListener("change", function( e ) {
+            hf.$( "#tempo" ).addEventListener("change", function( e ) {
                 let tempo = parseInt( e.target.value );
                 T.setTempo( tempo );
             });
 
             try {
-                hf.get( "chartLink" ).addEventListener("click", function( e ) {
+                hf.$( "#chartLink" ).addEventListener("click", function( e ) {
                     e.preventDefault();
                 });
             } catch ( err ){ }
@@ -99,7 +99,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 return false;
             });
 
-            hf.get( "saveForm" ).addEventListener("submit", function( e ) {
+            hf.$( "#saveForm" ).addEventListener("submit", function( e ) {
                 e.preventDefault();
                 setFormData( e );
                 e.target.submit();
@@ -209,8 +209,8 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
         function buildEnvironment() {
             setupAnimationFrame();
             document.getElementById("loading").style.display = 'none';
-            playButton = hf.get( "play" );
-            selectedButton = hf.get( "navigation" ).getElementsByClassName( "activeButton" )[0];
+            playButton = hf.$( "#play" );
+            selectedButton = hf.$( "#navigation" ).getElementsByClassName( "activeButton" )[0];
 
             T.setTempo( T.tempo );
             if ( gs.isRunning )
@@ -232,8 +232,8 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
         function showHideNotes()
         {
-            let notes = hf.get( "chordContainer" ),
-                controls = hf.get( "chartControls" );
+            let notes = hf.$( "#chordContainer" ),
+                controls = hf.$( "#chartControls" );
 
             if ( ! gs.fullscreen )
             {
@@ -291,11 +291,11 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                     else
                         viewingChart = ! viewingChart;
                 }
-                else if ( hf.isInside( e.target, hf.get( "hamburger" ) ) )
+                else if ( hf.isInside( e.target, hf.$( "#hamburger" ) ) )
                 {
                     let button = e.target,
-                        nav = hf.get( "navigation" ),
-                        trans = hf.get( "transport" );
+                        nav = hf.$( "#navigation" ),
+                        trans = hf.$( "#transport" );
 
                     if ( navOrTransport )
                     {
@@ -312,7 +312,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                 }
                 else if ( e.target.id ===  "transportSave")
                 {
-                    let saveButton = hf.get( "submitChart" );
+                    let saveButton = hf.$( "#submitChart" );
                     hf.log( saveButton );
                     saveButton.click();
                 }
@@ -325,10 +325,10 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                     document.body.appendChild( ta );
 
                     // Copy text and remove textarea
-                    ta = hf.get( "copy-text-ta" );
+                    ta = hf.$( "#copy-text-ta" );
                     ta.select();
                     document.execCommand( 'copy' );
-                    document.body.removeChild( hf.get( "copy-text-ta" ) );
+                    document.body.removeChild( hf.$( "#copy-text-ta" ) );
 
                     hf.toast( "Chart link copied to clipboard" );
                 }
@@ -420,7 +420,7 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
 
             T.tempo = state.tempo;
 
-            let tempo = hf.get( "tempo" );
+            let tempo = hf.$( "#tempo" );
             tempo.value = T.tempo;
         },
 

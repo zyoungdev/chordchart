@@ -130,7 +130,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
             };
 
         function setListeners() {
-            let pianoElement = hf.get( "piano" );
+            let pianoElement = hf.$( "#piano" );
 
             pianoElement.addEventListener( "mousedown", mousedown );
             pianoElement.addEventListener( "mouseup", mouseup );
@@ -238,7 +238,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
 
                     if ( buttonText === "Piano Controls" )
                     {
-                        let controls = hf.get( "pianoControls" );
+                        let controls = hf.$( "#pianoControls" );
 
                         if ( controls.classList.contains( "hide" ) )
                         {
@@ -253,7 +253,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
                     }
                     else if ( buttonText === "Piano Sequencer" )
                     {
-                        let sequencer = hf.get( "pianoSequence" );
+                        let sequencer = hf.$( "#pianoSequence" );
 
                         if ( sequencer.classList.contains( "hide" ) )
                         {
@@ -283,7 +283,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
 
     Piano.prototype = {
         addPad: function() {
-            let pianoSequence = hf.get( "pianoSequenceContainer" ),
+            let pianoSequence = hf.$( "#pianoSequenceContainer" ),
                 newPad = document.createElement( "div" ),
                 pads = pianoSequence.getElementsByClassName( "pianoPad" );
 
@@ -306,7 +306,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
         },
 
         subPad: function() {
-            let pianoSequence = hf.get( "pianoSequenceContainer" ),
+            let pianoSequence = hf.$( "#pianoSequenceContainer" ),
                 pads = pianoSequence.getElementsByClassName( "pianoPad" );
 
             if ( pads.length > 1 )
@@ -329,7 +329,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
         },
 
         setSequence: function() {
-            let pianoSequence = hf.get("pianoSequence"),
+            let pianoSequence = hf.$( "#pianoSequence" ),
                 pads = pianoSequence.getElementsByClassName("pianoPad");
 
             for ( let i = 0; i < T.sequence.length; i++ )
@@ -342,7 +342,7 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
         },
 
         getSequence: function() {
-            let pianoSequence = hf.get("pianoSequence"),
+            let pianoSequence = hf.$( "#pianoSequence" ),
                 pads = pianoSequence.getElementsByClassName("pianoPad");
 
             T.sequence = [];
@@ -469,9 +469,9 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
             T.transpose = state.transpose;
             T.volume = state.volume;
 
-            let transpose = hf.get( "pianoTranspose" ),
-                length = hf.get( "pianoAdditionalNoteLength" ),
-                volume = hf.get( "pianoVolume" );
+            let transpose = hf.$( "#pianoTranspose" ),
+                length = hf.$( "#pianoAdditionalNoteLength" ),
+                volume = hf.$( "#pianoVolume" );
 
             transpose.value = T.transpose;
             length.value = T.additionalNoteLength;
