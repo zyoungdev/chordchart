@@ -25,7 +25,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             keysDown = {},
             keyDownMap = {
                 "c": function( e ) { if ( e.ctrlKey ) { copyBar( e ); } },
-                "x": function( e ) { if ( e.ctrlKey ) { cutBar( e ); } },
+                // "x": function( e ) { if ( e.ctrlKey ) { cutBar( e ); } },
                 "v": function( e ) { if ( e.ctrlKey ) { pasteBar( e ); } },
                 "b": function( e ) { if ( e.ctrlKey ) {
                     let barNum = T.getSelectedBarNumber() + 1;
