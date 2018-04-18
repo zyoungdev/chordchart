@@ -682,6 +682,10 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 if ( keysDown[ e.key ] )
                     return;
 
+                // If cursor is inside any input box
+                if ( e.target.nodeName === "INPUT" )
+                    return;
+
                 let action = keyDownMap[ e.key ];
                 if ( action )
                     action( e );

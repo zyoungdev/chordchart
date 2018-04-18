@@ -179,8 +179,9 @@ define([  "HelperFunctions", "GlobalState", "AudioContext", "BufferLoader", "Mas
         }
 
         function keydown( e ) {
-            // If inputting text
-            if ( document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA")
+            // If cursor is inside any input box
+            if ( e.target.nodeName === "INPUT"
+                || e.target.nodeName === "TEXTAREA")
                 return;
 
             // If the key is already down
