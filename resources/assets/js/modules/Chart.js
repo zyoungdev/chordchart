@@ -395,7 +395,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
 
             function removeModelBar( index ) {
                 // Remove bar from model
-                T.bars.splice( index + 1, 1 );
+                T.bars.splice( index , 1 );
             }
 
             function removeViewBar( index ) {
@@ -735,7 +735,7 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                         let bars = hf.getElByCN( "bar" );
                         let index = Array.prototype.indexOf.call( bars, selectedBar );
 
-                        T.removeBar( --index );
+                        T.removeBar( index );
                     }
                     else if ( e.target.id === "addBar" )
                     {
