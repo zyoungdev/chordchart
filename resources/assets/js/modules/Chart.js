@@ -152,8 +152,11 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             function moveSelection( val ) {
-                let barNum = T.getSelectedBarNumber() + val;
-                setBarSelection( T.bars[ barNum ].element );
+                let oldSelectionNum = T.getSelectedBarNumber(),
+                    newSelectionNum = hf.clamp( oldSelectionNum + val, 0, ( T.bars.length - 1 ) );
+
+                if ( oldSelectionNum !== newSelectionNum )
+                    setBarSelection( T.bars[ newSelectionNum ].element );
             }
 
             function isNumber( n ) {
