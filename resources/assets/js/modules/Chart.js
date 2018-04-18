@@ -33,6 +33,10 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     T.addViewBar( barNum );
                     resetBarNumbers(); } },
                 "Delete": function( e ) { deleteSelectedBar(); },
+                "ArrowRight": function( e ) { moveSelection( 1 ); },
+                "ArrowLeft": function( e ) { moveSelection( -1 ); },
+                "ArrowUp": function( e ) { moveSelection( -4 ); },
+                "ArrowDown": function( e ) { moveSelection( 4 ); },
             },
             selectedBar = false,
             altIsDown = false,
@@ -145,6 +149,11 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                     let barNumElement = hf.$( ".number", bar, true );
                     barNumber = parseInt( barNumElement.innerHTML ) - 1;
                 }
+            }
+
+            function moveSelection( val ) {
+                let barNum = T.getSelectedBarNumber() + val;
+                setBarSelection( T.bars[ barNum ].element );
             }
 
             function isNumber( n ) {
