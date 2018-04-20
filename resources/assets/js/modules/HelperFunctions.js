@@ -89,8 +89,8 @@ define([ "GlobalState" ], function( gs ) {
                 document.body.removeChild( T.$( "#toast" ) );
             }, 3000);
         },
-        getRandomInt: function( max ) {
-          return Math.floor(Math.random() * Math.floor(max));
+        getRandomInt: function( min, max ) {
+          return Math.floor(Math.random() * ( max - min ) + min );
         },
         getBox: function( el ) {
             return el.getBoundingClientRect();

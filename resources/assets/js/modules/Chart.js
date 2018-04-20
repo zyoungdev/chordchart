@@ -173,7 +173,13 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
 
             function getRGB()
             {
-                return { r: hf.getRandomInt( 256 ), g: hf.getRandomInt( 256 ), b: hf.getRandomInt( 256 ) };
+                // Always use bright colors
+                let colorFloor = 50,
+                    colorCeil = 200;
+
+                return { r: hf.getRandomInt( colorFloor, colorCeil ),
+                         g: hf.getRandomInt( colorFloor, colorCeil ),
+                         b: hf.getRandomInt( colorFloor, colorCeil ) };
             }
 
         /***************************************************
@@ -536,11 +542,6 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
                 if ( ! firstPlugSelection )
                 {
                     randomRGB = getRGB();
-
-                    // Always use bright colors
-                    let colorFloor = 100;
-                    while ( randomRGB.r < colorFloor && randomRGB.g < colorFloor && randomRGB.b < colorFloor )
-                        randomRGB = getRGB();
 
                     currentPlugSelection.style.background = "rgb( " +
                         randomRGB.r + ", " +
