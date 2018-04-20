@@ -152,6 +152,15 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
             }
 
             function moveSelection( val ) {
+                let aBox = hf.getBox( hf.$( "#chartWorkspace" ) ),
+                    bBox = hf.getBox( T.bars[ 0 ].element ),
+                    isWideView = bBox.width * 5 < aBox.width;
+
+                // If there are > 5 ( ie 8 ) bars across, defined by CSS
+                // And moving up or down
+                if ( isWideView && Math.abs( val ) === 4 )
+                    val *= 2;
+
                 let oldSelectionNum = T.getSelectedBarNumber(),
                     newSelectionNum = hf.clamp( oldSelectionNum + val, 0, ( T.bars.length - 1 ) );
 
