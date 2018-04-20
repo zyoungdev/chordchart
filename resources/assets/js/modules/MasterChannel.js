@@ -1,8 +1,7 @@
 define([ "HelperFunctions", "AudioContext" ], function( hf, ac ) {
     "use strict";
 
-    let instance = null,
-        T = {};
+    let T = {};
 
     function MasterChannel() {
         T = this;
@@ -45,13 +44,5 @@ define([ "HelperFunctions", "AudioContext" ], function( hf, ac ) {
         }
     };
 
-    function getInstance()
-    {
-        if ( instance === null )
-            instance = new MasterChannel();
-
-        return instance;
-    }
-
-    return getInstance();
+    return new MasterChannel();
 });

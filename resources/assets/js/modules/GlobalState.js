@@ -1,8 +1,7 @@
 define(function() {
     "use strict";
 
-    let T = {},
-        instance = null;
+    let T = {};
 
     function GlobalState(){
         T = this;
@@ -25,12 +24,5 @@ define(function() {
         }
     };
 
-    function getInstance() {
-        if ( instance === null )
-            instance = new GlobalState();
-
-        return instance;
-    }
-
-    return getInstance();
+    return new GlobalState();
 });

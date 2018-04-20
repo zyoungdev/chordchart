@@ -1,8 +1,7 @@
 define([ "GlobalState" ], function( gs ) {
     "use strict";
 
-    let T = {},
-        instance = null;
+    let T = {};
 
     function HelperFunctions(){
         T = this;
@@ -106,12 +105,5 @@ define([ "GlobalState" ], function( gs ) {
         }
     };
 
-    function getInstance() {
-        if ( instance === null )
-            instance = new HelperFunctions();
-
-        return instance;
-    }
-
-    return getInstance();
+    return new HelperFunctions();
 });

@@ -1,8 +1,7 @@
 define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
     "use strict";
 
-    let T = {},
-        instance = null;
+    let T = {};
 
     function Chart() {
         T = this;
@@ -954,12 +953,5 @@ define([ "HelperFunctions", "GlobalState" ], function( hf, gs ) {
         }
     };
 
-    function getInstance() {
-        if ( instance === null )
-            instance = new Chart();
-
-        return instance;
-    }
-    
-    return getInstance();
+    return new Chart();
 });
