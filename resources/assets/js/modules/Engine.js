@@ -286,10 +286,15 @@ define([ "HelperFunctions", "GlobalState", "AudioContext", "MasterChannel", "Ins
                     // Show correct Page
                     document.getElementById( buttonText ).classList.remove( "hide" );
 
-                    if ( viewingChart && buttonText === "chart" )
-                        showHideNotes();
+                    if ( buttonText === "chart" )
+                    {
+                        if ( viewingChart )
+                            showHideNotes();
+
+                        viewingChart = true;
+                    }
                     else
-                        viewingChart = ! viewingChart;
+                        viewingChart = false;
                 }
                 else if ( hf.isInside( e.target, hf.$( "#hamburger" ) ) )
                 {
